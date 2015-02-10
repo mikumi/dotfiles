@@ -1,0 +1,7 @@
+#!/bin/bash
+
+EC2="i-02a2242a"
+REGION="ap-southeast-1"
+SSH_COMMAND="ssh -i /Volumes/Safe/MikumiEC2-SIN.pem ubuntu@ec2-1.michael-kuck.com -t"
+
+connect-ec2 "$EC2" "$REGION" "$SSH_COMMAND"

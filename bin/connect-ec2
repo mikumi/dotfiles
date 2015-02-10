@@ -1,0 +1,29 @@
+#!/bin/bash
+
+INSTANCE="$1"
+REGION="$2"
+SSH_COMMAND="$3"
+echo "INSTANCE: $INSTANCE, REGION="$REGION", SSH_COMMAND: $SSH_COMMAND"
+
+open ~/Safe.sparsebundle # for the .pem file
+
+echo "Starting up ec2 instance $INSTANCE if necessary..."
+running=`ec2start --region $REGION $INSTANCE | grep $INSTANCE | grep -c running`
+
+if [  $running -ne 0 ]; then
+	eval $SSH_COMMAND
+	exit
+fi
+
+echo -n "Waiting for instance.."
+while [  $running -eq 0 ]; do
+	echo -n "."
+	running=`ec2-describe-instance-status --region $$REGION | grep $INSTANCE | grep -c active`
+	sleep 1
+done
+echo ""
+
+echo "Connecting..."
+sleep 5
+eval "$SSH_COMMAND"
+

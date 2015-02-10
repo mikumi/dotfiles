@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# United States (US VPN)
+ping -c 3 us-midwest.privateinternetaccess.com
+ping -c 3 us-east.privateinternetaccess.com
+ping -c 3 us-west.privateinternetaccess.com
+ping -c 3 us-texas.privateinternetaccess.com
+ping -c 3 us-california.privateinternetaccess.com
+ping -c 3 us-florida.privateinternetaccess.com
+
+# Canada (CA VPN)
+ping -c 3 ca.privateinternetaccess.com
+ping -c 3 ca-toronto.privateinternetaccess.com
+
+# United Kingdom (UK VPN)
+ping -c 3 uk-london.privateinternetaccess.com
+ping -c 3 uk-southampton.privateinternetaccess.com
+
+# Switzerland (Swiss VPN)
+ping -c 3 swiss.privateinternetaccess.com
+
+# Netherlands (NL VPN)
+ping -c 3 nl.privateinternetaccess.com
+
+# Sweden (SE VPN)
+ping -c 3 sweden.privateinternetaccess.com
+
+# France (FR VPN)
+ping -c 3 france.privateinternetaccess.com
+
+# Germany (DE VPN)
+ping -c 3 germany.privateinternetaccess.com
+
+# Romania (RO VPN)
+ping -c 3 ro.privateinternetaccess.com
+
+# Hong Kong (HK VPN)
+ping -c 3 hk.privateinternetaccess.com
+
