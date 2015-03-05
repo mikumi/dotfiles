@@ -27,7 +27,7 @@ if [ "$SHELL" = "/bin/bash" ]; then
 	export HISTSIZE=100000                   # big big history
 	export HISTFILESIZE=100000               # big big history
 	shopt -s histappend                      # append to history, don't overwrite it
-	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"  # Save+reload history after each command	
+	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"  # Save+reload history after each command
 fi
 
 # Misc
@@ -35,6 +35,8 @@ PATH=$PATH:~/bin
 alias ll='ls -lah'
 alias sl='open -a "Sublime Text 2.app"'
 alias vi=vim
+alias mvi='open -a MacVim.app'
+alias sourcetree='open -a SourceTree'
 
 # rbenv
 eval "$(rbenv init -)"
