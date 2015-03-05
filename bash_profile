@@ -10,10 +10,10 @@ export ANDROID_HOME=~/Development/Libraries/Android/android-sdk-macosx
 launchctl setenv ANDROID_HOME $ANDROID_HOME
 export ANDROID_NDK_HOME=~/Development/Libraries/Android/android-ndk
 launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
-PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
 # Apportable
-PATH=$PATH:~/.apportable/SDK/bin
+export PATH=$PATH:~/.apportable/SDK/bin
 
 # Invisibi Development
 export PATH=~/Development/Libraries/depot_tools:$PATH
@@ -31,7 +31,7 @@ if [ "$SHELL" = "/bin/bash" ]; then
 fi
 
 # Misc
-PATH=$PATH:~/bin
+export PATH=$PATH:~/bin
 
 # Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -48,3 +48,4 @@ export S3E_DIR=/Applications/Marmalade.app/Contents/s3e
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/michaelkuck/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
+

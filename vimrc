@@ -1,7 +1,7 @@
-if filereadable(expand("~/.vimrc.bundles"))
+let mapleader = " "
 
 " Install Vundle plugins
-let mapleader = " " " What's this doing?
+if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
@@ -90,8 +90,12 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 set diffopt+=iwhite " ignore white space for diffs
 
+" Plugin configurations
+
 " Jedi-Vim
 let g:jedi#completions_command = "<A-Space>"
 " airline
 set laststatus=2 " show airline at all times
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
 

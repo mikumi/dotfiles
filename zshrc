@@ -15,7 +15,7 @@ CASE_SENSITIVE="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(adb ant brew brew-cask diskutil docker gem git gradle mvn osx pod rbenv rsync screen svn)
+plugins=(adb ant brew brew-cask diskutil docker gem git gradle mvn osx pod rbenv rsync screen svn zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 ### Load my custom bash stuff
