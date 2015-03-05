@@ -11,8 +11,8 @@ else
 	OPEN_FLIGHTS_WEBSERVICE="$1/open-flights/rest/airlines?iata=KE"
 fi
 
-YES=0 # Remeber exit code 0 is success. Don't think true=1/false=0
-NO=1  # Remeber exit code != 0 is error. Don't think true=1/false=0
+YES=0 # Remember exit code 0 is success. Don't think true=1/false=0
+NO=1  # Remember exit code != 0 is error. Don't think true=1/false=0
 
 ## FUNCTIONS ##
 

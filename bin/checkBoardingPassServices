@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+
+import urllib.request
+import sys
+
+DEFAULT_DOMAIN = "http://services.michael-kuck.com"
+
+BOARDING_PASS_WEBSERVICE_SUFFIX = "/boarding-pass/rest/flights/top?airline_code=KE"
+BOARDING_PASS_PATTERN = "\"airlineCode\":\"KE\""
+
+OPEN_FLIGHTS_WEBSERVICE_SUFFIX = "/open-flights/rest/airlines?iata=KE"
+OPEN_FLIGHTS_PATTERN = "\"name\":\"Korean Air\""
+
+
+def url_content_contains(url, pattern):
+    print("Checking: " + url + "...", end="")
+    success = False
+    try:
+        response = urllib.request.urlopen(url)
+        content = str(response.read())
+        success = content.find(pattern) >= 0
+    except:
+        success = False
+    if success:
+        print("OK")
+    else:
+        print("FAILED")
+    return success
+
+
+if __name__ == '__main__':
+    boardingPassUrl = DEFAULT_DOMAIN + BOARDING_PASS_WEBSERVICE_SUFFIX
+    openFlightsUrl = DEFAULT_DOMAIN + OPEN_FLIGHTS_WEBSERVICE_SUFFIX
+    if len(sys.argv) >= 2:
+        domain = str(sys.argv[1])
+        boardingPassUrl = domain + BOARDING_PASS_WEBSERVICE_SUFFIX
+        openFlightsUrl = domain + OPEN_FLIGHTS_WEBSERVICE_SUFFIX
+
+    url_content_contains(boardingPassUrl, BOARDING_PASS_PATTERN)
+    url_content_contains(openFlightsUrl, OPEN_FLIGHTS_PATTERN)
+
