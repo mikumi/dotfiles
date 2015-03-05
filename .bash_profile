@@ -32,11 +32,9 @@ fi
 
 # Misc
 PATH=$PATH:~/bin
-alias ll='ls -lah'
-alias sl='open -a "Sublime Text 2.app"'
-alias vi=vim
-alias mvi='open -a MacVim.app'
-alias sourcetree='open -a SourceTree'
+
+# Aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
 
 # rbenv
 eval "$(rbenv init -)"
@@ -47,7 +45,6 @@ export S3E_DIR=/Applications/Marmalade.app/Contents/s3e
 # Marmalade SDK addition: end
 
 # boot2docker
-
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/michaelkuck/.boot2docker/certs/boot2docker-vm
 export DOCKER_TLS_VERIFY=1
