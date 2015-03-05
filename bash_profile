@@ -1,6 +1,6 @@
 # Colors
 export CLICOLOR=1
-export LSCOLORS=GxFxCxDxBxegedabagaced
+# export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Java
 export JAVA_HOME=$(/usr/libexec/java_home)

@@ -63,8 +63,9 @@ if has('gui_running')
     set background=light
     colorscheme solarized
 else
-    "set background=dark
-    "colorscheme solarized
+    " Terminal colors will be used
+    set background=dark
+    colorscheme solarized
 endif
 set guifont=Menlo:h12
 set colorcolumn=81
