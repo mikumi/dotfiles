@@ -1,5 +1,3 @@
-let mapleader = " "
-
 " Install Vundle plugins
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -69,7 +67,7 @@ else
     "colorscheme solarized
 endif
 set guifont=Menlo:h12
-set colorcolumn=80
+set colorcolumn=81
 
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
@@ -89,6 +87,10 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 " TODO: is this working?
 
 set diffopt+=iwhite " ignore white space for diffs
+
+" Misc mappings
+map <Leader>j !python -m json.tool<CR>
+map <C-a> <esc>ggVG<CR>
 
 " Plugin configurations
 
