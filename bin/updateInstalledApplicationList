@@ -1,0 +1,7 @@
+#!/bin/sh
+
+ls /Applications | cat > ~/Dropbox/System\ Configuration/InstalledApplications; 
+ls ~/Applications | cat >> ~/Dropbox/System\ Configuration/InstalledApplications;
+
+cat ~/Dropbox/System\ Configuration/InstalledApplications;
+echo "Done."
