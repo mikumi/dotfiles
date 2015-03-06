@@ -3,4 +3,6 @@ alias sl='open -a "Sublime Text 2.app"'
 alias vi=vim
 alias mvi='open -a MacVim.app'
 alias st='open -a SourceTree'
+alias ij='open -a "IntelliJ IDEA 14 CE"'
+alias appcode='open -a AppCode'
 
