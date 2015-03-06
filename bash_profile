@@ -39,11 +39,6 @@ export PATH=$PATH:~/bin
 # rbenv
 eval "$(rbenv init -)"
 
-# Marmalade SDK addition: please do not edit these lines
-export PATH=$PATH:"/Applications/Marmalade.app/Contents/s3e/bin"
-export S3E_DIR=/Applications/Marmalade.app/Contents/s3e
-# Marmalade SDK addition: end
-
 # boot2docker
 export DOCKER_HOST=tcp://192.168.59.103:2376
 export DOCKER_CERT_PATH=/Users/michaelkuck/.boot2docker/certs/boot2docker-vm
