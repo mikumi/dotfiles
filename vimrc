@@ -75,6 +75,7 @@ endif
 set guifont=Menlo:h12
 set colorcolumn=81
 
+" Command completion
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
     let col = col('.') - 1

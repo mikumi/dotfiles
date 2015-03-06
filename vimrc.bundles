@@ -8,9 +8,12 @@ Plugin 'gmarik/Vundle.vim'
 " Vundle Plugins
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
-Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'elzr/vim-json'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rizzatti/dash.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'yegappan/mru'
+" Plugin 'Valloric/YouCompleteMe'
 
 call vundle#end()
 " END Vundle configuration
