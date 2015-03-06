@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import urllib.request
+import urllib2
 import sys
 
 DEFAULT_DOMAIN = "http://services.michael-kuck.com"
@@ -13,10 +13,10 @@ OPEN_FLIGHTS_PATTERN = "\"name\":\"Korean Air\""
 
 
 def url_content_contains(url, pattern):
-    print("Checking: " + url + "...", end="")
+    print url + " -> ",
     success = False
     try:
-        response = urllib.request.urlopen(url)
+        response = urllib2.urlopen(url)
         content = str(response.read())
         success = content.find(pattern) >= 0
     except:
@@ -29,6 +29,7 @@ def url_content_contains(url, pattern):
 
 
 if __name__ == '__main__':
+    print "Checking urls..."
     boardingPassUrl = DEFAULT_DOMAIN + BOARDING_PASS_WEBSERVICE_SUFFIX
     openFlightsUrl = DEFAULT_DOMAIN + OPEN_FLIGHTS_WEBSERVICE_SUFFIX
     if len(sys.argv) >= 2:
