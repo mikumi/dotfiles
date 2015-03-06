@@ -15,9 +15,14 @@ set number " show line numbers on left side
 set ruler " Line and character numbers
 set showcmd
 set backspace=indent,eol,start
+set mouse=a
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
+
 autocmd BufWritePre * :%s/\s\+$//e " trim trailing white space
+autocmd! bufwritepost .vimrc source % " auto-reload .vimrc on save
 
 augroup vimrcEx
   autocmd!
@@ -89,14 +94,18 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 set diffopt+=iwhite " ignore white space for diffs
 
+" Fix copy and pasting. Use F2 before last chunks
+set pastetoggle=<F2>
+set clipboard=unnamed
+
 " Misc mappings
 map <Leader>j !python -m json.tool<CR>
 map <C-a> <esc>ggVG<CR>
+nmap <silent> <leader>d <Plug>DashSearch
+map <C-e> <esc>:MRU<CR>
 
 " Plugin configurations
 
-" Jedi-Vim
-let g:jedi#completions_command = "<A-Space>"
 " airline
 set laststatus=2 " show airline at all times
 " NERDTree
