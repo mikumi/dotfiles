@@ -1,8 +1,8 @@
 alias ll='ls -lah'
 alias sl='open -a "Sublime Text 2.app"'
 alias vi=vim
-alias mvi='open -a MacVim.app'
+alias mvi='mvim'
 alias st='open -a SourceTree'
 alias ij='open -a "IntelliJ IDEA 14 CE"'
 alias appcode='open -a AppCode'
-
+alias finder='open -a Finder'
