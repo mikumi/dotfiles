@@ -1,9 +1,10 @@
 [user]
 	email = me@michael-kuck.com
-	name = MichaelK
+	name = Michael Kuck
 [core]
 	autocrlf = input
 	excludesfile = /Users/michaelkuck/.gitignore_global
+	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -12,3 +13,9 @@
 	trustExitCode = true
 [credential]
 	helper = osxkeychain
+[http]
+	postBuffer = 2097152
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
