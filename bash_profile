@@ -8,7 +8,7 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # Android Dev
 export ANDROID_HOME=~/Development/Libraries/Android/android-sdk-macosx
 launchctl setenv ANDROID_HOME $ANDROID_HOME
-export ANDROID_NDK_HOME=~/Development/Libraries/Android/android-ndk
+export ANDROID_NDK_HOME=~/Development/Libraries/Android/android-sdk-macosx/ndk-bundle
 launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
