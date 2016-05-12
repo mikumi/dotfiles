@@ -12,9 +12,6 @@ export ANDROID_NDK_HOME=~/Development/Libraries/Android/android-ndk
 launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
-# Apportable
-export PATH=$PATH:~/.apportable/SDK/bin
-
 # Invisibi Development
 export PATH=~/Development/Libraries/depot_tools:$PATH
 
