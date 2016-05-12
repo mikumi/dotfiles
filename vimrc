@@ -13,13 +13,15 @@ filetype plugin indent on
 
 set number " show line numbers on left side
 set ruler " Line and character numbers
-set showcmd
+set showcmd " Show info about current command at bottom
 set backspace=indent,eol,start
 set mouse=a
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set encoding=utf-8
+set nowrap
 
 autocmd BufWritePre * :%s/\s\+$//e " trim trailing white space
 autocmd! bufwritepost .vimrc source % " auto-reload .vimrc on save
@@ -100,7 +102,7 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 
 " Misc mappings
-map <Leader>j !python -m json.tool<CR>
+map <Leader>j :%!python -m json.tool<CR>
 map <C-a> <esc>ggVG<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 map <C-e> <esc>:MRU<CR>
@@ -112,3 +114,20 @@ set laststatus=2 " show airline at all times
 " NERDTree
 map <C-n> :NERDTreeToggle<CR>
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+set conceallevel=0 " Don't hide quotes in json
+
+" Disable arrow keys for practicing
+" noremap <Up> <NOP>
+" noremap <Down> <NOP>
+" noremap <Left> <NOP>
+" noremap <Right> <NOP>
