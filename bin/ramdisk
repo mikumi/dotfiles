@@ -1,0 +1,10 @@
+#!/bin/bash
+
+mount_point="$1"
+ramdisk_size=$(($2*2048))
+
+echo "Creating $2MB ($ramdisk_size blocks) ramdisk at $mount_point"
+
+DISK_ID=`hdid -nomount ram://$ramdisk_size`
+newfs_hfs -v DerivedData $DISK_ID
+diskutil mount -mountPoint $mount_point $DISK_ID
