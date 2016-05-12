@@ -36,4 +36,7 @@ export PATH=$PATH:~/bin
 # rbenv
 eval "$(rbenv init -)"
 
+# ruby
+export GEM_HOME=$HOME/.gem
+export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
 
