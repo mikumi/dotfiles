@@ -12,6 +12,7 @@ endif
 filetype plugin indent on
 
 set number " show line numbers on left side
+set relativenumber " show line numbers relative to current line
 set ruler " Line and character numbers
 set showcmd " Show info about current command at bottom
 set backspace=indent,eol,start
