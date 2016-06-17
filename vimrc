@@ -103,7 +103,7 @@ set pastetoggle=<F2>
 set clipboard=unnamed
 
 " Misc mappings
-map <Leader>j :%!python -m json.tool<CR>
+map <Leader>j :%!python -m json.tool<CR>:set syntax=json<CR>
 map <C-a> <esc>ggVG<CR>
 nmap <silent> <leader>d <Plug>DashSearch
 map <C-e> <esc>:MRU<CR>
