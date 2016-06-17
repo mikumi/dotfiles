@@ -8,7 +8,6 @@ Plugin 'gmarik/Vundle.vim'
 " Vundle Plugins
 Plugin 'altercation/vim-colors-solarized' " color scheme
 Plugin 'bling/vim-airline' " bottom bar plugin
-Plugin 'elzr/vim-json' " better json highlighting
 Plugin 'kien/ctrlp.vim' " quickly open files
 Plugin 'rizzatti/dash.vim' " quick access to Dash
 Plugin 'scrooloose/nerdtree' " File browser
