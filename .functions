@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+function google() { open /Applications/Safari.app/ "http://www.google.com/search?q= $1"; }
+function saf() { open /Applications/Safari.app/ "http://$1"; }

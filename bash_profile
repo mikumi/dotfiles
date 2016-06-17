@@ -42,3 +42,6 @@ eval "$(rbenv init -)"
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
 
+# functions
+
+[[ -f ~/.functions ]] && source ~/.functions
