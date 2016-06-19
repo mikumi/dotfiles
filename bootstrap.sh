@@ -9,10 +9,6 @@ function doIt() {
     echo "Configuring OS X..."
     sh osx-defaults.sh
 
-    # Install Oh-My-Zsh
-    echo "Installing Oh-My-Zsh..."
-    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
     # Install brews & casks
     echo "Installing brews..."
     sh install-brews.sh
@@ -42,6 +38,10 @@ function doIt() {
 
     chflags hidden bin
     chflags hidden dotfiles
+
+    # Install Oh-My-Zsh
+    echo "Installing Oh-My-Zsh..."
+    sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
