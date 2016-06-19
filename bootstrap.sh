@@ -2,20 +2,26 @@
 
 function doIt() {
     # Install homebrew
+    echo "Installing homebrew..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
     # Configure OS X
+    echo "Configuring OS X..."
     sh osx-defaults.sh
 
     # Install Oh-My-Zsh
+    echo "Installing Oh-My-Zsh..."
     sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
     # Install brews & casks
+    echo "Installing brews..."
     sh install-brews.sh
 
     # Install Vundle package manager for VIM
+    echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+    echo "Creating symbolic links for dotfiles"
     cd ~
     ln -s dotfiles/.aliases
     ln -s dotfiles/.bash_profile
