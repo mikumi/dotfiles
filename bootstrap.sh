@@ -23,21 +23,21 @@ function doIt() {
 
     echo "Creating symbolic links for dotfiles"
     cd ~
-    ln -s dotfiles/.aliases
-    ln -s dotfiles/.bash_profile
-    ln -s dotfiles/.ec2cfg
-    ln -s dotfiles/.functions
-    ln -s dotfiles/.gitconfig
-    ln -s dotfiles/.s3cfg
-    ln -s dotfiles/.tmux.conf
-    ln -s dotfiles/.vimrc
-    ln -s dotfiles/.zshrc
+    rm .aliases; ln -s dotfiles/.aliases
+    rm .bash_profile; ln -s dotfiles/.bash_profile
+    rm .ec2cfg; ln -s dotfiles/.ec2cfg
+    rm .functions; ln -s dotfiles/.functions
+    rm .gitconfig; ln -s dotfiles/.gitconfig
+    rm .s3cfg; ln -s dotfiles/.s3cfg
+    rm .tmux.conf; ln -s dotfiles/.tmux.conf
+    rm .vimrc; ln -s dotfiles/.vimrc
+    rm .zshrc; ln -s dotfiles/.zshrc
 
     ln -s dotfiles/bin
 
     mkdir -p .gradle
     cd .gradle
-    ln -s ~/dotfiles/.gradle/gradle.properties
+    rm gradle.properties; ln -s ~/dotfiles/.gradle/gradle.properties
     cd ~
 
     chflags hidden bin
