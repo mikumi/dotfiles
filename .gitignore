@@ -2,3 +2,5 @@
 
 .DS_Store
 bin/Extensions
+bin/unhide
+bin/unhide.sh
