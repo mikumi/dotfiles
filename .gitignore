@@ -1,0 +1,4 @@
+# This is not an actual dotfile but the git ignore list for this repository :-)
+
+.DS_Store
+bin/Extensions
