@@ -1,5 +1,5 @@
 alias ll='ls -lah'
-alias sl='open -a "Sublime Text 2.app"'
+alias sl='open -a "Sublime Text.app"'
 alias vi=vim
 alias mvi='mvim'
 alias st='open -a SourceTree'
