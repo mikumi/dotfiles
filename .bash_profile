@@ -36,7 +36,7 @@ export PATH=$PATH:~/bin
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # rbenv
-eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # ruby
 export GEM_HOME=$HOME/.gem
