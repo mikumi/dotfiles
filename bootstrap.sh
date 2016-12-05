@@ -7,7 +7,7 @@ function doIt() {
 
     # Configure OS X
     echo "Configuring OS X..."
-    sh osx-defaults.sh
+    sh .macos
 
     # Install brews & casks
     echo "Installing brews..."
