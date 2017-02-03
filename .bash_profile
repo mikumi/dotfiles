@@ -39,8 +39,8 @@ export PATH=$PATH:~/bin
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # ruby
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
+# export GEM_HOME=$HOME/.gem
+# export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
 
 # functions
 
