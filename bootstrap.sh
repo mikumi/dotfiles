@@ -1,17 +1,19 @@
 #!/bin/bash
 
 function doIt() {
-    # Install homebrew
-    echo "Installing homebrew..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    if [[ `uname` == 'Darwin' ]] ; then
+        # Install homebrew
+        echo "Installing homebrew..."
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-    # Configure OS X
-    echo "Configuring OS X..."
-    sh .macos
+        # Configure OS X
+        echo "Configuring OS X..."
+        sh .macos
 
-    # Install brews & casks
-    echo "Installing brews..."
-    sh install-brews.sh
+        # Install brews & casks
+        echo "Installing brews..."
+        sh install-brews.sh
+    fi
 
     # Install Vundle package manager for VIM
     echo "Installing Vundle plugin manager for VIM..."
