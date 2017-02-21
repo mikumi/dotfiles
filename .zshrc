@@ -1,8 +1,12 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+source /usr/local/share/antigen/antigen.zsh
 
-ZSH_THEME="robbyrussell"
-CASE_SENSITIVE="true"
+antigen init ~/.antigenrc
+
+# Path to your oh-my-zsh installation.
+# export ZSH=$HOME/.oh-my-zsh
+
+#ZSH_THEME="robbyrussell"
+#CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable command auto-correction.
 # DISABLE_CORRECTION="true"
@@ -15,8 +19,8 @@ CASE_SENSITIVE="true"
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-plugins=(adb ant brew brew-cask diskutil docker gem git gradle mvn osx pod rbenv rsync screen svn zsh-syntax-highlighting vagrant)
-source $ZSH/oh-my-zsh.sh
+# plugins=(adb ant brew brew-cask diskutil docker gem git gradle mvn osx pod rbenv rsync screen svn zsh-syntax-highlighting vagrant)
+# source $ZSH/oh-my-zsh.sh
 
 ### Load my custom bash stuff
 source ~/.bash_profile

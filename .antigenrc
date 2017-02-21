@@ -1,0 +1,23 @@
+antigen use oh-my-zsh
+
+antigen bundles <<EOBUNDLES
+    adb
+    ant
+    # diskutil
+    docker
+    gem
+    git
+    gradle
+    mvn
+    osx
+    pod
+    rbenv
+    rsync
+    screen
+    zsh-users/zsh-syntax-highlighting
+    vagrant
+EOBUNDLES
+
+antigen theme robbyrussell
+
+antigen apply

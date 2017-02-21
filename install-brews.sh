@@ -2,6 +2,7 @@
 
 brew update && brew upgrade
 
+brew install antigen
 brew install git
 brew install htop
 brew install netcat
