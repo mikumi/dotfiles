@@ -3,16 +3,21 @@ export CLICOLOR=1
 # export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home)
+if [[ `uname` == 'Darwin' ]] ; then
+    export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
 # Android Dev
-export ANDROID_HOME=~/Development/Libraries/Android/android-sdk-macosx
-export ANDROID_NDK_HOME=~/Development/Libraries/Android/android-sdk-macosx/ndk-bundle
+if [[ `uname` == 'Darwin' ]] ; then
+    export ANDROID_HOME=~/Development/Libraries/Android/SDK
+    export ANDROID_NDK_HOME=~/Development/Libraries/Android/SDK/ndk-bundle
+    export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+fi
+
 if [[ -z "$TMUX" ]]; then
     launchctl setenv ANDROID_HOME $ANDROID_HOME
     launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
 fi
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 
 # Invisibi Development
 export PATH=~/Development/Libraries/depot_tools:$PATH
@@ -39,8 +44,10 @@ export PATH=$PATH:~/bin
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # ruby
-export GEM_HOME=$HOME/.gem
-export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
+if [[ `uname` == 'Darwin' ]] ; then
+    export GEM_HOME=$HOME/.gem
+    export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
+fi
 
 # functions
 
