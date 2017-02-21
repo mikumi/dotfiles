@@ -28,6 +28,7 @@ function doIt() {
     rm .s3cfg; ln -s dotfiles/.s3cfg
     rm .tmux.conf; ln -s dotfiles/.tmux.conf
     rm .vimrc; ln -s dotfiles/.vimrc
+    rm .vimrc.bundles; ln -s dotfiles/.vimrc.bundles
     rm .zshrc; ln -s dotfiles/.zshrc
 
     ln -s dotfiles/bin
