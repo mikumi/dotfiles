@@ -19,9 +19,6 @@ if [[ -z "$TMUX" ]]; then
     launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
 fi
 
-# Invisibi Development
-export PATH=~/Development/Libraries/depot_tools:$PATH
-
 # EC2
 source ~/.ec2cfg
 
