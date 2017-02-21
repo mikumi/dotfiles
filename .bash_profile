@@ -12,11 +12,12 @@ if [[ `uname` == 'Darwin' ]] ; then
     export ANDROID_HOME=~/Development/Libraries/Android/SDK
     export ANDROID_NDK_HOME=~/Development/Libraries/Android/SDK/ndk-bundle
     export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
-fi
 
-if [[ -z "$TMUX" ]]; then
-    launchctl setenv ANDROID_HOME $ANDROID_HOME
-    launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
+    if [[ -z "$TMUX" ]]; then
+        launchctl setenv ANDROID_HOME $ANDROID_HOME
+        launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
+    fi
+
 fi
 
 # EC2
