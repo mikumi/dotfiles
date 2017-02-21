@@ -47,6 +47,8 @@ function doIt() {
     rm gradle.properties; ln -s ~/dotfiles/.gradle/gradle.properties
     cd ~
 
+    vim +PluginInstall +qall
+
     chflags hidden bin
     chflags hidden dotfiles
 }
