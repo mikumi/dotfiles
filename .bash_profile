@@ -44,7 +44,7 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # ruby
 if [[ `uname` == 'Darwin' ]] ; then
     export GEM_HOME=$HOME/.gem
-    export PATH=$GEM_HOME/bin:$GEM_HOME/ruby/2.0.0/bin:$PATH
+    export PATH=$GEM_HOME/bin:$PATH
 fi
 
 # functions
