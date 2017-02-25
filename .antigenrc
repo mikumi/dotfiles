@@ -5,6 +5,8 @@ antigen bundles <<EOBUNDLES
     ant
     # diskutil
     docker
+    docker-compose
+    leonhartX/docker-machine-zsh-completion
     gem
     git
     gradle
