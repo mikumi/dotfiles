@@ -73,6 +73,7 @@ set clipboard=unnamed
 " Don't hide quotes in json
 set conceallevel=0
 
+set wildmenu " Display matching files/commands when tab complete in command mode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
