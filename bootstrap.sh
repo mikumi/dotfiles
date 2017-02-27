@@ -31,6 +31,7 @@ function doIt() {
     rm .aliases; ln -s dotfiles/.aliases
     rm .antigenrc; ln -s dotfiles/.antigenrc
     rm .bash_profile; ln -s dotfiles/.bash_profile
+    rm .ctags; ln -s dotfiles/.ctags
     rm .ec2cfg; ln -s dotfiles/.ec2cfg
     rm .functions; ln -s dotfiles/.functions
     rm .gitconfig; ln -s dotfiles/.gitconfig

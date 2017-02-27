@@ -75,6 +75,10 @@ set conceallevel=0
 
 set wildmenu " Display matching files/commands when tab complete in command mode
 
+" Call :MakeTags to setup ctags for current folder (run in root project
+" folder)
+command! MakeTags !ctags -R .
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
