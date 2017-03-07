@@ -15,3 +15,8 @@ sh bootstrap.sh
 
 - macOS
 - Debian/Ubuntu based Linux (anything with APT repository manager)
+
+# Terminal Preview
+
+![Image of Yaktocat]
+(https://image.ibb.co/g9Qcva/terminal.png)
