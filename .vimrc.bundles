@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized' " color scheme
 Plugin 'bling/vim-airline' " bottom bar plugin
 Plugin 'kien/ctrlp.vim' " quickly open files
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rizzatti/dash.vim' " quick access to Dash
 Plugin 'scrooloose/nerdtree' " File browser
 Plugin 'scrooloose/syntastic' " syntax check for all languages
