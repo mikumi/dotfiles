@@ -1,4 +1,4 @@
-alias ll='ls -lah'
+alias ll='ls -f -lah'
 alias sl='open -a "Sublime Text.app"'
 alias vi=vim
 alias mvi='mvim'
