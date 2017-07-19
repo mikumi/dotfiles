@@ -28,7 +28,6 @@ brew install tmux
 brew install trash
 brew install tree
 brew install vim
-brew install watchman
 
 brew cask install aerial
 brew cask install android-studio
@@ -60,12 +59,14 @@ brew cask install java
 brew cask install kitematic
 brew cask install macvim
 brew cask install markright
+brew cask install messenger
 brew cask install mp4tools
 brew cask install mplayerx
 brew cask install openemu
 brew cask install parallels-desktop
 brew cask install pycharm
 brew cask install sequel-pro
+brew cask install sip
 brew cask install sketch
 brew cask install skype
 brew cask install slack
