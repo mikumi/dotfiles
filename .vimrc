@@ -109,7 +109,7 @@ set laststatus=2 " show airline at all times
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
- Syntastic
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -124,7 +124,7 @@ let g:syntastic_check_on_wq = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " This will remap the TAB key to behave smarter and either open CTRL-P for
-tab completion or just insert a real TAB, depending on the situation
+" tab completion or just insert a real TAB, depending on the situation
 
 set wildmode=list:longest,list:full
 function! InsertTabWrapper()
