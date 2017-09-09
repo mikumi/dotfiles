@@ -16,7 +16,6 @@ brew install netcat
 brew install netperf
 brew install node
 brew install pidcat
-brew install rbenv
 brew install reattach-to-user-namespace
 brew install s3cmd
 brew install sox
