@@ -10,9 +10,18 @@ function doIt() {
         echo "Configuring OS X..."
         sh .macos
 
-        # Install brews & casks
+        # Install Mac App Store apps
+        echo "Installing Mac App Store apps..."
+        brew install mas
+        sh install-mas.sh
+
+        # Install brews
         echo "Installing brews..."
         sh install-brews.sh
+
+        # Install casks
+        echo "Installing casks..."
+        sh install-casks.sh
     fi
 
     if [[ `uname` == 'Linux' ]] ; then
