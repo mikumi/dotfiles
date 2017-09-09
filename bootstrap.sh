@@ -35,6 +35,7 @@ function doIt() {
     rm .ec2cfg; ln -s dotfiles/.ec2cfg
     rm .functions; ln -s dotfiles/.functions
     rm .gitconfig; ln -s dotfiles/.gitconfig
+    rm .ideavimrc; ln -s dotfiles/.ideavimrc
     rm .npmrc; ln -s dotfiles/.npmrc
     rm .s3cfg; ln -s dotfiles/.s3cfg
     rm .tmux.conf; ln -s dotfiles/.tmux.conf
