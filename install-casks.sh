@@ -21,6 +21,7 @@ brew cask install google-chrome
 brew cask install google-hangouts
 brew cask install handbrake
 brew cask install icons8
+brew cask install iina
 brew cask install imageoptim
 brew cask install intellij-idea
 brew cask install invisionsync
@@ -28,6 +29,7 @@ brew cask install istat-menus
 brew cask install iterm2
 brew cask install java
 brew cask install kitematic
+brew cask install mactracker
 brew cask install macvim
 brew cask install markright
 brew cask install messenger
@@ -35,6 +37,7 @@ brew cask install mp4tools
 brew cask install mplayerx
 brew cask install openemu
 brew cask install parallels-desktop
+brew cask install postman
 brew cask install pycharm
 brew cask install sequel-pro
 brew cask install sip
