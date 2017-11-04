@@ -59,6 +59,8 @@ function doIt() {
     rm gradle.properties; ln -s ~/dotfiles/.gradle/gradle.properties
     cd ~
 
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
     vim +PluginInstall +qall
 
     chflags hidden bin
