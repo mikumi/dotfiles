@@ -50,3 +50,10 @@ fi
 # functions
 
 [[ -f ~/.functions ]] && source ~/.functions
+
+# Fastlane
+if [[ `uname` == 'Darwin' ]] ; then
+    export PATH="$HOME/.fastlane/bin:$PATH"
+    source ~/.fastlane/completions/completion.sh
+fi
+
