@@ -27,8 +27,8 @@ function doIt() {
     if [[ `uname` == 'Linux' ]] ; then
         sudo apt-get update
         sudo apt-get install build-essential curl zsh tmux vim
-        mkdir -p /usr/local/share/antigen
-        curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.0/bin/antigen.zsh > /usr/local/share/antigen/antigen.zsh
+        sudo mkdir -p /usr/local/share/antigen
+        sudo sh -c 'curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.0/bin/antigen.zsh > /usr/local/share/antigen/antigen.zsh'
     fi
 
     # Install Vundle package manager for VIM
