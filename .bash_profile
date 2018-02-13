@@ -20,8 +20,8 @@ if [[ `uname` == 'Darwin' ]] ; then
 
 fi
 
-# EC2
-source ~/.ec2cfg
+# AWS
+export AWS_DEFAULT_PROFILE=personal
 
 # Shared CMD History (only bash)
 if [ "$SHELL" = "/bin/bash" ]; then
