@@ -48,6 +48,7 @@ function doIt() {
     rm .npmrc; ln -s dotfiles/.npmrc
     rm .s3cfg; ln -s dotfiles/.s3cfg
     rm .tmux.conf; ln -s dotfiles/.tmux.conf
+    rm .tmux.remote.conf; ln -s dotfiles/.tmux.remote.conf
     rm .vimrc; ln -s dotfiles/.vimrc
     rm .vimrc.bundles; ln -s dotfiles/.vimrc.bundles
     rm .zshrc; ln -s dotfiles/.zshrc
