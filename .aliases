@@ -1,4 +1,8 @@
-alias ll='ls -f -lah'
+if [[ `uname` == 'Darwin' ]] ; then
+    alias ll='ls -f -lah'
+else
+    alias ll='ls -lah'
+fi
 alias llt='ls -lahtcr'
 alias sl='open -a "Sublime Text.app"'
 alias vi=vim
