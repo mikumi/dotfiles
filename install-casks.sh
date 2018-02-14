@@ -34,7 +34,6 @@ brew cask install macvim
 brew cask install markright
 brew cask install messenger
 brew cask install mp4tools
-brew cask install mplayerx
 brew cask install openemu
 brew cask install parallels-desktop
 brew cask install postman
