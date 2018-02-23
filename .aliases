@@ -14,4 +14,4 @@ alias finder='open -a Finder'
 alias t='tmux attach -t base || tmux new -s base'
 alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
-
+alias mikenv="mosh --ssh='ssh -p 2222' mikumi@mikenv.michael-kuck.com -- sh -c 'tmux attach -t base || tmux new -s base'"
