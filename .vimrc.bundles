@@ -7,6 +7,7 @@ Plugin 'gmarik/Vundle.vim'
 
 " Vundle Plugins
 Plugin 'altercation/vim-colors-solarized' " color scheme
+Plugin 'benmills/vimux' " Tmux integration
 Plugin 'bling/vim-airline' " bottom bar plugin
 Plugin 'kien/ctrlp.vim' " quickly open files
 Plugin 'vim-airline/vim-airline-themes'
@@ -14,6 +15,7 @@ Plugin 'rizzatti/dash.vim' " quick access to Dash
 Plugin 'scrooloose/nerdtree' " File browser
 Plugin 'scrooloose/syntastic' " syntax check for all languages
 Plugin 'Townk/vim-autoclose' "auto close brackets, quotes etc when typing
+Plugin 'tpope/vim-fugitive'  " git integration
 Plugin 'yegappan/mru' " recently used files
 " Plugin 'Valloric/YouCompleteMe' " Smart autocompletion for all languages
 
