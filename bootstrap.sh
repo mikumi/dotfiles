@@ -51,7 +51,7 @@ function doIt() {
     rm .tmux.remote.conf; ln -s dotfiles/.tmux.remote.conf
     rm .vimrc; ln -s dotfiles/.vimrc
     rm .vimrc.bundles; ln -s dotfiles/.vimrc.bundles
-    rm .zshrc; ln -s dotfiles/.zshrc
+    rm .zprofile; ln -s dotfiles/.zprofile
 
     ln -s dotfiles/bin
 
