@@ -57,3 +57,6 @@ if [[ `uname` == 'Darwin' ]] ; then
     source ~/.fastlane/completions/completion.sh
 fi
 
+# Local profile
+[[ -f ~/.local_profile ]] && source ~/.local_profile
+
