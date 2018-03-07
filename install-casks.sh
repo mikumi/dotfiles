@@ -24,7 +24,6 @@ brew cask install icons8
 brew cask install iina
 brew cask install imageoptim
 brew cask install intellij-idea
-brew cask install invisionsync
 brew cask install istat-menus
 brew cask install iterm2
 brew cask install java
@@ -43,13 +42,10 @@ brew cask install sip
 brew cask install sketch
 brew cask install skype
 brew cask install slack
-brew cask install sourcetree
 brew cask install spotify
-brew cask install sqlitebrowser
 brew cask install steveschow-gfxcardstatus
 brew cask install sublime-text
 brew cask install subtitles
-brew cask install vlc
 brew cask install webstorm
 brew cask install whatsapp
 brew cask install zeplin
