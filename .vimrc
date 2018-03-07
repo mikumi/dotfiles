@@ -80,6 +80,13 @@ set wildmenu " Display matching files/commands when tab complete in command mode
 command! MakeTags !ctags -R .
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PERFORMANCE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set lazyredraw
+set ttyfast
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
