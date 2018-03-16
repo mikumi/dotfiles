@@ -3,15 +3,16 @@ if [[ `uname` == 'Darwin' ]] ; then
 else
     alias ll='ls -lah'
 fi
-alias llt='ls -lahtcr'
-alias sl='open -a "Sublime Text.app"'
-alias vi=vim
-alias mvi='mvim'
-alias st='open -a SourceTree'
-alias ij='open -a "IntelliJ IDEA 14 CE"'
+
 alias appcode='open -a AppCode'
-alias finder='open -a Finder'
-alias t='tmux attach -t base || tmux new -s base'
+alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.swift -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
 alias dstats='docker stats $(docker ps --format={{.Names}})'
-alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
+alias finder='open -a Finder'
+alias ij='open -a "IntelliJ IDEA 14 CE"'
+alias llt='ls -lahtcr'
 alias mikenv="mosh --ssh='ssh -p 2222' mikumi@mikenv.michael-kuck.com -- sh -c 'tmux attach -t base || tmux new -s base'"
+alias mvi='mvim'
+alias sl='open -a "Sublime Text.app"'
+alias st='open -a SourceTree'
+alias t='tmux attach -t base || tmux new -s base'
+alias vi=vim
