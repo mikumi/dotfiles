@@ -7,6 +7,7 @@ brew install awscli
 brew install ccat
 brew install cmake
 brew install ctags
+brew install dockutil
 brew install exiftool
 brew install ffmpeg
 brew install git
