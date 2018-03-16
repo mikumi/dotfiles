@@ -64,8 +64,10 @@ function doIt() {
 
     vim +PluginInstall +qall
 
-    chflags hidden bin
-    chflags hidden dotfiles
+    if [[ `uname` == 'Darwin' ]] ; then
+        chflags hidden bin
+        chflags hidden dotfiles
+    fi
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
