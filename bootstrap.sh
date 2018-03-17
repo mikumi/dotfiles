@@ -72,8 +72,8 @@ function doIt() {
     vim +PluginInstall +qall
 
     if [[ `uname` == 'Darwin' ]] ; then
-        dockutil --remove all
-        sh configure-dock.sh
+        dockutil --remove all --no-restart
+        sh dotfiles/configure-dock.sh
         killall Dock
 
         chflags hidden bin
