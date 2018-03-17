@@ -65,6 +65,10 @@ function doIt() {
     vim +PluginInstall +qall
 
     if [[ `uname` == 'Darwin' ]] ; then
+        dockutil --remove all
+        sh configure-dock.sh
+        killall Dock
+
         chflags hidden bin
         chflags hidden dotfiles
     fi
