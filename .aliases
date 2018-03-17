@@ -5,7 +5,9 @@ else
 fi
 
 alias appcode='open -a AppCode'
-alias cat=ccat
+if [ -x "$(command -v ccat)" ]; then
+    alias cat=ccat
+fi
 alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.swift -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
 alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias finder='open -a Finder'
