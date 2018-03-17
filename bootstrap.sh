@@ -54,7 +54,7 @@ function doIt() {
         .vimrc.bundles \
         .zprofile
     )
-    for file in $dotfiles ; do
+    for file in ${dotfiles[@]} ; do
         rm $file
         ln -s dotfiles/$file
     done
