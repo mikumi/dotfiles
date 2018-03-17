@@ -25,9 +25,7 @@ brew cask install iina
 brew cask install imageoptim
 brew cask install intellij-idea
 brew cask install istat-menus
-brew cask install iterm2
 brew cask install java
-brew cask install kitematic
 brew cask install mactracker
 brew cask install macvim
 brew cask install markright
