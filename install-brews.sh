@@ -1,37 +1,53 @@
 #!/bin/bash
+INSTALLATION_TYPE=$1
 
 brew update && brew upgrade
 
-brew install antigen
-brew install awscli
-brew install ccat
-brew install cmake
-brew install ctags
-brew install dockutil
-brew install exiftool
-brew install ffmpeg
-brew install git
-brew install httpie
-brew install hub
-brew install mplayer
-brew install netcat
-brew install netperf
-brew install node
-brew install pidcat
-brew install reattach-to-user-namespace
-brew install s3cmd
-brew install sox
-brew install speedtest_cli
-brew install swaks
-brew install swiftlint
-brew install tldr
-brew install tmux
-brew install trash
-brew install tree
-brew install vim
+echo ""
+echo "Installing BASIC brews..."
+echo ""
 
+brew install antigen
+brew install ccat
+brew install dockutil
+brew install git
+brew install grc
+brew install reattach-to-user-namespace
+brew install speedtest_cli
+brew install tmux
+brew install vim
+brew install trash
+
+if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
+    echo ""
+    echo "Installing DEFAULT brews..."
+    echo ""
+    brew install awscli
+    brew install cmake
+    brew install ctags
+    brew install httpie
+    brew install hub
+    brew install netcat
+    brew install netperf
+    brew install node
+    brew install pidcat
+    brew install s3cmd
+    brew install sox
+    brew install swaks
+    brew install swiftlint
+    brew install tldr
+    brew install tree
+fi
+
+if [ "$INSTALLATION_TYPE" == "FULL" ]; then
+    echo ""
+    echo "Installing FULL brews..."
+    echo ""
+    brew install exiftool
+    brew install ffmpeg
+    brew install mplayer
+fi
 
 brew doctor
 brew cleanup && brew prune
-
 

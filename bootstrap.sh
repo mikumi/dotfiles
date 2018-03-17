@@ -12,8 +12,8 @@ function doIt() {
 
         # Install Mac App Store apps
         echo "Installing Mac App Store apps..."
-        brew install mas $INSTALLATION_TYPE $EMAIL_DE $EMAIL_US
-        sh install-mas.sh
+        brew install mas
+        sh install-mas.sh $INSTALLATION_TYPE $EMAIL_DE $EMAIL_US
 
         # Install brews
         echo "Installing brews..."
@@ -80,6 +80,55 @@ function doIt() {
         chflags hidden dotfiles
     fi
 }
+
+function printUsage() {
+    echo "./bootstrap.sh --email-de=<email> --email-us=<email> --installation-type=<type>"
+    echo ""
+    echo "    --email-de               German App Store email (required on Mac only)"
+    echo "    --email-us               US App Store email (required on Mac only)"
+    echo "    --installation-type      [basic|default|full] (required)"
+}
+
+function validateCmdArgs() {
+    if [ -z $INSTALLATION_TYPE ]; then
+        printUsage;
+        exit
+    fi
+    if [[ `uname` == 'Darwin' ]] ; then
+        if [ -z $EMAIL_DE ] || [ -z $EMAIL_US ]; then
+            printUsage;
+            exit
+        fi
+    fi
+    echo ""
+    echo "App Store Email (Germany)  = ${EMAIL_DE}"
+    echo "App Store Email (US)       = ${EMAIL_US}"
+    echo "Installation type          = ${INSTALLATION_TYPE}"
+}
+
+for i in "$@"
+do
+case $i in
+    --email-de=*)
+    EMAIL_DE="${i#*=}"
+    shift # past argument=value
+    ;;
+    --email-us=*)
+    EMAIL_US="${i#*=}"
+    shift # past argument=value
+    ;;
+    -i=*|--installation=*)
+    INSTALLATION_TYPE=$(echo "${i#*=}" | awk '{print toupper($0)}')
+    shift # past argument=value
+    ;;
+    *)
+        # unknown option
+    ;;
+esac
+done
+
+validateCmdArgs;
+
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
