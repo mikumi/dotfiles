@@ -71,6 +71,8 @@ function doIt() {
 
     vim +PluginInstall +qall
 
+    chsh -s /bin/zsh
+
     if [[ `uname` == 'Darwin' ]] ; then
         dockutil --remove all --no-restart
         sh dotfiles/configure-dock.sh
