@@ -20,6 +20,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew cask install dash
     brew cask install diffmerge
     brew cask install docker
+    brew cask install fastlane
     brew cask install fork
     brew cask install google-chrome
     brew cask install google-hangouts
