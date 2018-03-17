@@ -12,16 +12,16 @@ function doIt() {
 
         # Install Mac App Store apps
         echo "Installing Mac App Store apps..."
-        brew install mas
+        brew install mas $INSTALLATION_TYPE $EMAIL_DE $EMAIL_US
         sh install-mas.sh
 
         # Install brews
         echo "Installing brews..."
-        sh install-brews.sh
+        sh install-brews.sh $INSTALLATION_TYPE
 
         # Install casks
         echo "Installing casks..."
-        sh install-casks.sh
+        sh install-casks.sh $INSTALLATION_TYPE
     fi
 
     if [[ `uname` == 'Linux' ]] ; then
@@ -35,23 +35,30 @@ function doIt() {
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-    echo "Creating symbolic links for dotfiles"
     cd ~
-    rm .aliases; ln -s dotfiles/.aliases
-    rm .antigenrc; ln -s dotfiles/.antigenrc
-    rm .bash_profile; ln -s dotfiles/.bash_profile
-    rm .ctags; ln -s dotfiles/.ctags
-    rm .ec2cfg; ln -s dotfiles/.ec2cfg
-    rm .functions; ln -s dotfiles/.functions
-    rm .gitconfig; ln -s dotfiles/.gitconfig
-    rm .ideavimrc; ln -s dotfiles/.ideavimrc
-    rm .npmrc; ln -s dotfiles/.npmrc
-    rm .s3cfg; ln -s dotfiles/.s3cfg
-    rm .tmux.conf; ln -s dotfiles/.tmux.conf
-    rm .tmux.remote.conf; ln -s dotfiles/.tmux.remote.conf
-    rm .vimrc; ln -s dotfiles/.vimrc
-    rm .vimrc.bundles; ln -s dotfiles/.vimrc.bundles
-    rm .zprofile; ln -s dotfiles/.zprofile
+    echo "Creating symbolic links for dotfiles"
+    dotfiles=(
+        .aliases \
+        .antigenrc \
+        .bash_profile \
+        .ctags \
+        .ec2cfg \
+        .functions \
+        .gitconfig \
+        .ideavimrc \
+        .npmrc \
+        .s3cfg \
+        .tmux.conf \
+        .tmux.remote.conf \
+        .vimrc \
+        .vimrc.bundles \
+        .zprofile
+    )
+    for file in $dotfiles ; do
+        rm $file
+        ln -s dotfiles/$file
+    done
+    unset dotfiles file
 
     ln -s dotfiles/bin
 
