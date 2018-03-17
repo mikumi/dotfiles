@@ -21,3 +21,9 @@ alias st='open -a SourceTree'
 alias t='tmux attach -t base || tmux new -s base'
 alias vi=vim
 alias webstorm='open -a WebStorm'
+
+# Generic colorizer
+if [ -x "$(command -v grc)" ]; then
+    alias diff="grc diff"
+fi
+
