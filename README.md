@@ -18,5 +18,4 @@ sh bootstrap.sh
 
 # Terminal Preview
 
-![Image of Yaktocat]
-(https://image.ibb.co/g9Qcva/terminal.png)
+![alt Terminal Preview](https://image.ibb.co/g9Qcva/terminal.png)
