@@ -4,9 +4,19 @@
 # settings we’re about to change
 osascript -e 'tell application "System Preferences" to quit'
 
-# Configure dock behavior and size
+# Screen Saver
+defaults -currentHost write com.apple.screensaver moduleDict '{
+    moduleName = iLifeSlideshows;
+    path = "/System/Library/Frameworks/ScreenSaver.framework/Resources/iLifeSlideshows.saver";
+    type = 0;
+}'
+defaults -currentHost write com.apple.screensaver idleTime -int 120
+defaults -currentHost write com.apple.ScreenSaverPhotoChooser SelectedFolderPath -string "/Library/Screen Savers/Default Collections/1-National Geographic"
+
+# Dock
 defaults write com.apple.dock tilesize -int 35
-defaults write com.apple.dock largesize -int 50
 defaults write com.apple.dock magnification -bool true
+defaults write com.apple.dock largesize -int 48
 
-
+# Mission Control
+# TODO: disable the CTRL keys
