@@ -23,7 +23,4 @@ alias vi=vim
 alias webstorm='open -a WebStorm'
 
 # Generic colorizer
-if [ -x "$(command -v grc)" ]; then
-    alias diff="grc diff"
-fi
 
