@@ -1,0 +1,218 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const os = require("os");
+const path = require("path");
+const readline = require("readline");
+const { execSync } = require('child_process');
+
+/** Colors **/
+// From: https://stackoverflow.com/a/41407246/968099
+const Reset = "\x1b[0m";
+const Bright = "\x1b[1m";
+const Dim = "\x1b[2m";
+const Underscore = "\x1b[4m";
+const Blink = "\x1b[5m";
+const Reverse = "\x1b[7m";
+const Hidden = "\x1b[8m";
+
+const FgBlack = "\x1b[30m";
+const FgRed = "\x1b[31m";
+const FgGreen = "\x1b[32m";
+const FgYellow = "\x1b[33m";
+const FgBlue = "\x1b[34m";
+const FgMagenta = "\x1b[35m";
+const FgCyan = "\x1b[36m";
+const FgWhite = "\x1b[37m";
+
+const BgBlack = "\x1b[40m";
+const BgRed = "\x1b[41m";
+const BgGreen = "\x1b[42m";
+const BgYellow = "\x1b[43m";
+const BgBlue = "\x1b[44m";
+const BgMagenta = "\x1b[45m";
+const BgCyan = "\x1b[46m";
+const BgWhite = "\x1b[47m";
+
+/** Main **/
+
+let photoLibraryPathLhs = expandHomePath(process.argv[2]);
+let photoLibraryPathRhs = expandHomePath(process.argv[3]);
+let listOnly = false
+
+if (process.argv.length === 4) {
+    photoLibraryPathLhs = expandHomePath(process.argv[2]);
+    photoLibraryPathRhs = expandHomePath(process.argv[3]);
+} else if (process.argv.length === 5) {
+    if (process.argv[2] === "--list-only") {
+        listOnly = true;
+    } else {
+        console.error(`Invalid argument: ${process.argv[2]}`);
+        process.exit(1);
+    }
+    photoLibraryPathLhs = expandHomePath(process.argv[3]);
+    photoLibraryPathRhs = expandHomePath(process.argv[4]);
+} else {
+    printUsage();
+    process.exit(1);
+}
+
+if (!isLibraryPathValid(photoLibraryPathLhs) || !isLibraryPathValid(photoLibraryPathRhs)) {
+    console.log(`Your Photos library looks different than expected, aborting.`);
+    process.exit(1);
+}
+
+console.log(`1: ${photoLibraryPathLhs}`);
+console.log(`2: ${photoLibraryPathRhs}`);
+ask('Are you sure you want to continue? (y/N) ').then(answer => {
+    if (!answer.toUpperCase().startsWith("Y")) {
+        process.exit(0);
+    }
+    console.log("Looking for diffs...");
+
+    console.log("Executing tmutil to find diffs, this may take a while...");
+    const tmUtilCommand = `tmutil compare -s "${photoLibraryPathLhs}" "${photoLibraryPathRhs}" > tmutil_output.tmp`;
+    console.log(tmUtilCommand);
+    execSync(tmUtilCommand);
+
+    console.log("Creating folders for diff output...");
+    const outoutFolder = `tmutil_diff_output_${new Date().toISOString()}`;
+    const addedFolder = `${outoutFolder}/ADDED`;
+    const deletedFolder = `${outoutFolder}/DELETED`;
+    const changedFolder = `${outoutFolder}/CHANGED`;
+    console.log(outoutFolder);
+    fs.mkdirSync(outoutFolder);
+    console.log(addedFolder);
+    fs.mkdirSync(addedFolder);
+    console.log(deletedFolder);
+    fs.mkdirSync(deletedFolder);
+    console.log(changedFolder);
+    fs.mkdirSync(changedFolder);
+
+    const lineReader = require('readline').createInterface({
+        input: require('fs').createReadStream('tmutil_output.tmp')
+    });
+
+    lineReader.on('line', function (line) {
+        if (line.charAt(0) === "-") {
+            const file = pathFromTmUtilLine(line);
+            if (!fs.existsSync(file) || !fs.lstatSync(file).isFile() || (!isPhotoMasterPath(file) && !isPhotoVersionPath(file))) {
+                return;
+            }
+            console.log(`DELETED: ${file}`);
+            const destination = `${deletedFolder}/${path.basename(file)}`;
+            // console.log(`cp "${file}" -> "${destination}"`);
+            fs.copyFileSync(file, `${destination}`)
+        } else if (line.charAt(0) === "+") {
+            // const file = pathFromTmUtilLine(line);
+            // if (!fs.existsSync(file) || !fs.lstatSync(file).isFile() || (!isPhotoMasterPath(file) && !isPhotoVersionPath(file))) {
+            //     return;
+            // }
+            // console.log(`ADDED: ${file}`);
+            // const destination = `${addedFolder}/${path.basename(file)}`;
+            // // console.log(`cp "${file}" -> "${destination}"`);
+            // fs.copyFileSync(file, `${destination}`)
+        } else if (line.charAt(0) === "!") {
+            const file = pathFromTmUtilLine(line);
+            if (!fs.existsSync(file) || !fs.lstatSync(file).isFile() || (!isPhotoMasterPath(file) && !isPhotoVersionPath(file))) {
+                return;
+            }
+            const librarySubPath = file.split(".photoslibrary/")[1];
+            const beforeFile = `${photoLibraryPathRhs}/${librarySubPath}`;
+            const change = {
+                before: beforeFile,
+                after: file,
+            };
+            console.log(`CHANGED: ${JSON.stringify(change)}`);
+            const destinationBefore = `${addedFolder}/before_${path.basename(beforeFile)}`;
+            const destinationAfter = `${addedFolder}/after_${path.basename(file)}`;
+            // console.log(`cp "${beforeFile}" -> "${destinationBefore}"`);
+            // console.log(`cp "${file}" -> "${destinationAfter}"`);
+            fs.copyFileSync(beforeFile, `${destinationBefore}`)
+            fs.copyFileSync(file, `${destinationAfter}`)
+        } else {
+            console.log(line);
+        }
+    });
+});
+
+/** Functions **/
+
+function printUsage() {
+    console.log("tmutil-photo-diff\n" +
+        "\n" +
+        "Usage:" +
+        "TODO");
+}
+
+function findLibraryPath() {
+    console.log("Searching for default Photos library...");
+    const picturesPath = `${os.homedir}/Pictures`;
+    let photosLibraryPath = undefined;
+    const files = fs.readdirSync(picturesPath);
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const fileExt = path.extname(file);
+        if (fileExt !== ".photoslibrary") {
+            continue;
+        }
+
+        const fullFilePath = `${picturesPath}/${file}`;
+        console.log(`Photos library found at ${FgGreen}${fullFilePath}${Reset}`);
+        if (photosLibraryPath) {
+            console.log("Found more than one Photos library in default location, please specify path manually.");
+            return undefined;
+        }
+
+        photosLibraryPath = fullFilePath;
+    }
+    return photosLibraryPath;
+}
+
+function expandHomePath(filePath) {
+    if (filePath[0] === '~') {
+        return path.join(process.env.HOME, filePath.slice(1));
+    }
+    return filePath;
+}
+
+function isLibraryPathValid(libraryPath) {
+    console.log(`Validating file structure of Photos library: ${libraryPath}`);
+    // Just checking some basic common file structures to make sure we have what we are expecting
+    const mastersFolder = `${libraryPath}/Masters`;
+    const resourcesFolder = `${libraryPath}/resources`;
+
+    const isStructureValid = fs.existsSync(mastersFolder)
+        && fs.existsSync(resourcesFolder);
+
+    return isStructureValid;
+}
+
+function pathFromTmUtilLine(line) {
+    const splits = line.split("  /");
+    const path = `/${splits[1]}`;
+    return path;
+}
+
+function isPhotoMasterPath(path) {
+    return path.indexOf(".photoslibrary/resources/media/version") >= 0;
+}
+
+function isPhotoVersionPath(path) {
+    return path.indexOf(".photoslibrary/Masters/") >= 0;
+}
+
+// From: https://gist.github.com/robbyoconnor/a5c1f514babbb3309099
+function ask(question) {
+    var r = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false
+    });
+    return new Promise((resolve, error) => {
+        r.question(question, answer => {
+            r.close();
+            resolve(answer);
+        });
+    })
+}
