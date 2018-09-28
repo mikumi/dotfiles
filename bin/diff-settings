@@ -1,0 +1,28 @@
+#!/bin/bash
+
+CMD_PLIST='plutil -convert xml1 -o /dev/stdout'
+CMD_DIFF=$(command -v colordiff || command -v diff)
+
+TEMP_DIR=$(mktemp -d -t diff-settings)
+echo "Created tmp dir: $TEMP_DIR"
+
+BEFORE_DIR="$TEMP_DIR/before"
+AFTER_DIR="$TEMP_DIR/after"
+
+
+rsync -a ~/Library/Preferences/ $TEMP_DIR/before/ >/dev/null 2>&1
+echo
+read -p "Do your stuff and change some settings. Press a key when done..." -n 1 -r
+echo
+rsync -a ~/Library/Preferences/ $TEMP_DIR/after/ >/dev/null 2>&1
+
+diff -urq $BEFORE_DIR $AFTER_DIR
+
+files=("$(diff -urq $BEFORE_DIR $AFTER_DIR | sed 's/Only in .*//g' | sed 's/.*after\/\(.*\)[[:space:]]differ.*/\1/g')")
+for file in $files; do
+    echo ""
+    echo "Difference found in file:: $file"
+    $CMD_DIFF -u <($CMD_PLIST "$BEFORE_DIR/$file") <($CMD_PLIST "$AFTER_DIR/$file")
+done
+
+rm -rf $TEMP_DIR
