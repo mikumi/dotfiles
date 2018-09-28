@@ -12,9 +12,13 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     echo ""
     echo "Installing DEFAULT apps for DE..."
     echo ""
-    mas install 497799835 # Xcode
+    mas install 539883307 # LINE
+    mas install 715768417 # Microsoft Remote Desktop
     mas install 409203825 # Numbers
+    mas install 1116599239 # NordVPN
     mas install 409201541 # Pages
+    mas install 425424353 # The Unarchiver
+    mas install 497799835 # Xcode
 fi
 
 if [ "$INSTALLATION_TYPE" == "FULL" ]; then
@@ -23,6 +27,8 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     echo ""
     mas install 409183694 # Keynote
     mas install 928871589 # Noizio
+    mas install 405399194 # Kindle
+    mas install 1094255754 # Outbank
 fi
 
 # US
@@ -35,11 +41,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     echo ""
     echo "Installing DEFAULT apps for US..."
     echo ""
-    mas install 539883307 # LINE
-    mas install 715768417 # Microsoft Remote Desktop
     mas install 736189492 # Notability
-    mas install 425424353 # The Unarchiver
-    mas install 1116599239 # NordVPN
 fi
 
 if [ "$INSTALLATION_TYPE" == "FULL" ]; then
@@ -47,6 +49,4 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     echo "Installing FULL apps for US..."
     echo ""
     mas install 1055511498 # Day One
-    mas install 405399194 # Kindle
-    mas install 1094255754 # Outbank
 fi

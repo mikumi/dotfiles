@@ -12,6 +12,7 @@ brew install ccat
 brew install dockutil
 brew install git
 brew install grc
+brew install mosh
 brew install reattach-to-user-namespace
 brew install speedtest_cli
 brew install tmux
@@ -25,6 +26,8 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew install awscli
     brew install cmake
     brew install ctags
+    brew install docker-compose
+    brew install docker-machine
     brew install httpie
     brew install hub
     brew install netcat
@@ -45,6 +48,7 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     echo ""
     brew install exiftool
     brew install ffmpeg
+    brew install mpv
     brew install mplayer
 fi
 
