@@ -4,7 +4,7 @@ export CLICOLOR=1
 
 # Java
 if [[ `uname` == 'Darwin' ]] ; then
-    export JAVA_HOME=$(/usr/libexec/java_home)
+    # export JAVA_HOME=$(/usr/libexec/java_home)
 fi
 
 # Android Dev
