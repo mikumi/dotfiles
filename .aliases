@@ -9,6 +9,7 @@ if [ -x "$(command -v ccat)" ]; then
     alias cat=ccat
 fi
 alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.swift -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
+alias docker-compose-prod="docker-compose -f docker-compose.yml -f docker-compose.prod.yml"
 alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias finder='open -a Finder'
 alias ij='open -a "IntelliJ IDEA 14 CE"'
