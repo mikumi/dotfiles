@@ -12,10 +12,13 @@ brew install ccat
 brew install dockutil
 brew install fzf
 brew install git
+brew install git-lfs
 brew install grc
+brew install jq
 brew install mosh
 brew install reattach-to-user-namespace
 brew install speedtest_cli
+brew install telnet
 brew install tmux
 brew install vim
 brew install trash
