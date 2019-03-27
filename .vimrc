@@ -194,4 +194,9 @@ augroup vimrcEx
   " Allow stylesheets to autocomplete hyphenated words
   autocmd FileType css,scss,sass setlocal iskeyword+=-
 augroup END
-"
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FUZZY COMPLETE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set rtp+=/usr/local/opt/fzf

@@ -10,6 +10,7 @@ echo ""
 brew install antigen
 brew install ccat
 brew install dockutil
+brew install fzf
 brew install git
 brew install grc
 brew install mosh
