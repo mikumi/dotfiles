@@ -25,10 +25,22 @@ function doIt() {
     fi
 
     if [[ `uname` == 'Linux' ]] ; then
+        # Install basics
+        echo "Installing basic apt packages..."
         sudo apt-get update
-        sudo apt-get install build-essential curl zsh tmux vim
-        sudo mkdir -p /usr/local/share/antigen
-        sudo sh -c 'curl https://cdn.rawgit.com/zsh-users/antigen/v1.4.0/bin/antigen.zsh > /usr/local/share/antigen/antigen.zsh'
+        sudo apt-get install build-essential curl zsh locales
+        sudo locale-gen en_US.UTF-8
+
+        # Install homebrew
+        echo "Installing homebrew..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        brew install gcc@7
+
+        # Install brews
+        echo "Installing brews..."
+        sh install-brews.sh $INSTALLATION_TYPE
     fi
 
     # Install Vundle package manager for VIM
