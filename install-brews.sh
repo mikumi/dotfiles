@@ -57,5 +57,5 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
 fi
 
 brew doctor
-brew cleanup && brew prune
+brew cleanup
 
