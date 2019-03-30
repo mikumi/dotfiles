@@ -37,12 +37,12 @@ set nowrap
 " Font and colors
 if has('gui_running')
     set background=light
-    colorscheme solarized
 else
     " Terminal colors will be used
     set background=dark
-    colorscheme solarized
 endif
+let g:solarized_termtrans=1 " Fixes background color with Blink/Mosh
+colorscheme solarized
 set guifont=Menlo:h12
 set colorcolumn=81
 
