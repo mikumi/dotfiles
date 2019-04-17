@@ -60,3 +60,5 @@ fi
 # Local profile
 [[ -f ~/.local_profile ]] && source ~/.local_profile
 
+# Add /usr/local/sbin to path for those rare brews
+export PATH="/usr/local/sbin:$PATH"
