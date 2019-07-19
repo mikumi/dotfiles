@@ -32,6 +32,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew install ctags
     brew install docker-compose
     brew install docker-machine
+    brew install htop
     brew install httpie
     brew install hub
     brew install netcat
