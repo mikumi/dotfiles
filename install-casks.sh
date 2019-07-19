@@ -15,6 +15,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     echo ""
     brew cask install android-studio
     brew cask install appcleaner
+    brew cask install appcode
     brew cask install arq
     brew cask install caffeine
     brew cask install dash
@@ -34,6 +35,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew cask install sip
     brew cask install sketch
     brew cask install slack
+    brew cask install webstorm
     brew cask install whatsapp
     brew cask install zeplin
 fi
@@ -47,6 +49,7 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     brew cask install cinebench
     brew cask install cyberduck
     brew cask install daisydisk
+    brew cask install datagrip
     brew cask install dolphin
     brew cask install geekbench
     brew cask install handbrake
@@ -57,6 +60,7 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     brew cask install mp4tools
     brew cask install openemu
     brew cask install parallels
+    brew cask install pycharm
     brew cask install postman
     brew cask install skype
     brew cask install spotify
