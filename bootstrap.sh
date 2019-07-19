@@ -100,7 +100,7 @@ function printUsage() {
     echo ""
     echo "    --email-de               German App Store email (required on Mac only)"
     echo "    --email-us               US App Store email (required on Mac only)"
-    echo "    --installation-type      [basic|default|full] (required)"
+    echo "    --installation           [basic|default|full] (required)"
 }
 
 function validateCmdArgs() {
