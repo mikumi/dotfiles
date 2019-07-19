@@ -17,8 +17,6 @@ Plugin 'scrooloose/syntastic' " syntax check for all languages
 Plugin 'Townk/vim-autoclose' "auto close brackets, quotes etc when typing
 Plugin 'tpope/vim-fugitive'  " git integration
 Plugin 'yegappan/mru' " recently used files
-Plugin 'zxqfl/tabnine-vim' " smart auto completion
-" Plugin 'Valloric/YouCompleteMe' " Smart autocompletion for all languages
 
 call vundle#end()
 " END Vundle configuration
