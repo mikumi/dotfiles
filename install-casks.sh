@@ -19,7 +19,6 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew cask install appcode
     brew cask install backblaze
     brew cask install bettertouchtool
-    brew cask install caffeine
     brew cask install dash
     brew cask install diffmerge
     brew cask install docker
