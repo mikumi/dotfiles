@@ -1,15 +1,26 @@
-source /usr/local/share/antigen/antigen.zsh
-antigen init ~/.antigenrc
+# Java
+if [[ `uname` == 'Darwin' ]] ; then
+    # export JAVA_HOME=$(/usr/libexec/java_home)
+fi
 
-# Load my custom bash stuff
-source ~/.bash_profile
+# Android Dev
+if [[ `uname` == 'Darwin' ]] ; then
+#    export ANDROID_HOME=~/Development/Libraries/Android/SDK
+#    export ANDROID_NDK_HOME=~/Development/Libraries/Android/SDK/ndk-bundle
+#    export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+#
+#    if [[ -z "$TMUX" ]]; then
+#        launchctl setenv ANDROID_HOME $ANDROID_HOME
+#        launchctl setenv ANDROID_NDK_HOME $ANDROID_NDK_HOME
+#    fi
+#
+fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# ruby
+if [[ `uname` == 'Darwin' ]] ; then
+    export GEM_HOME=$HOME/.gem
+    export PATH=$GEM_HOME/bin:$PATH
+fi
 
-# If a new command line being added to the history list duplicates an older one,
-# the older command is removed from the list (even if it is not the previous
-# event).
-setopt HIST_IGNORE_ALL_DUPS
-
-PROMPT='%{$fg[cyan]%}%c %{$fg_bold[blue]%}% %{$fg_bold[blue]%}$(git_prompt_info) %{$reset_color%}'
-RPROMPT='${DOCKER_MACHINE_NAME} [%{$fg[gray]%}%M %{$fg_bold[blue]%}%@]'
+# Add /usr/local/sbin to path for those rare brews
+export PATH="/usr/local/sbin:$PATH"

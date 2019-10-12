@@ -53,6 +53,7 @@ function doIt() {
         .aliases \
         .antigenrc \
         .bash_profile \
+        .bashrc \
         .ctags \
         .ec2cfg \
         .functions \
@@ -64,6 +65,7 @@ function doIt() {
         .tmux.remote.conf \
         .vimrc \
         .vimrc.bundles \
+        .zshrc \
         .zprofile
     )
     for file in ${dotfiles[@]} ; do
