@@ -14,7 +14,7 @@ alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias finder='open -a Finder'
 alias ij='open -a "IntelliJ IDEA 14 CE"'
 alias llt='ls -lahtcr'
-alias mikenv="mosh --ssh='ssh -p 2222' mikumi@mikenv.michael-kuck.com -- sh -c 'tmux attach -t base || tmux new -s base'"
+alias mikenv='LC_CTYPE=en_US.UTF-8 mosh --ssh="ssh -p 2222" mikumi@mikenv.michael-kuck.com -- sh -c "tmux attach -t base || tmux new -s base"'
 alias mvi='mvim'
 alias plist='plutil -convert xml1 -o /dev/stdout'
 alias sl='open -a "Sublime Text.app"'
