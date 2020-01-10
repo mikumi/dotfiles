@@ -17,6 +17,7 @@ antigen bundles <<EOBUNDLES
     rbenv
     rsync
     screen
+    zsh-users/zsh-completions
     zsh-users/zsh-syntax-highlighting
     vagrant
 EOBUNDLES
