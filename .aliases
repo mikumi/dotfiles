@@ -21,6 +21,7 @@ alias sl='open -a "Sublime Text.app"'
 alias slcopy='pbcopy && tmpfile=$(mktemp /tmp/slcopy.XXXXXX) && pbpaste > $tmpfile && sl $tmpfile'
 alias st='open -a SourceTree'
 alias t='tmux attach -t base || tmux new -s base'
+alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
 alias vi=vim
 alias webstorm='open -a WebStorm'
 alias vscode='open -a "Visual Studio Code"'
