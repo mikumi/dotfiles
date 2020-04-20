@@ -13,6 +13,8 @@ dockutil --add "/Applications/Fantastical.app" --no-restart
 dockutil --add "/System/Applications/Reminders.app" --no-restart	
 dockutil --add "/Applications/Trello.app" --no-restart	
 dockutil --add "/System/Applications/Notes.app" --no-restart	
+dockutil --add "/Applications/Bear.app" --no-restart	
+dockutil --add "/Applications/Dropbox Paper.app" --no-restart	
 dockutil --add "/Applications/Day One.app" --no-restart	
 dockutil --add "/Applications/Numbers.app" --no-restart	
 dockutil --add "/System/Applications/Photos.app" --no-restart	
