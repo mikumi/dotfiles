@@ -10,3 +10,5 @@ if [ "$SHELL" = "/bin/bash" ]; then
 	shopt -s histappend                      # append to history, don't overwrite it
 	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"  # Save+reload history after each command
 fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
