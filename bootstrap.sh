@@ -60,6 +60,7 @@ function doIt() {
         .gitconfig \
         .ideavimrc \
         .npmrc \
+        .spaceship \
         .s3cfg \
         .tmux.conf \
         .tmux.remote.conf \
