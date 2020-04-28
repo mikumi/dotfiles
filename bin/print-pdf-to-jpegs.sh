@@ -9,6 +9,7 @@ echo $TEMP_DIR
 
 echo "Converting $PDF to JEPGs..."
 
+# This requires imagemagick and ghostscript to be installed
 convert -density 150 -colorspace sRGB "$PDF" +adjoin -background white "$TEMP_DIR/$PDF-%04d.png"
 for i in $TEMP_DIR/*.png; do sips -s format jpeg -s formatOptions 70 "${i}" --out "${i%png}jpg"; done
 
