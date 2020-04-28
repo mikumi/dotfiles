@@ -8,7 +8,7 @@ zoneid=Z9L4NG6J6VFUH
 # The name server for the zone, can also be obtained from route53
 nameserver=ns-70.awsdns-08.com
 # Optional -- Uncomment to use the credentials for a named profile
-export AWS_PROFILE=Personal
+export AWS_PROFILE=personal
 
 # Get your external IP address using opendns service
 # newip=`dig +short myip.opendns.com @resolver1.opendns.com`
