@@ -15,7 +15,7 @@ brew install fzf
 brew install git
 brew install git-lfs
 brew install jq
-brew install mosh
+brew install --HEAD -s mosh # from source for unpublished OSC 52 fix
 brew install nmap
 brew install reattach-to-user-namespace
 brew install speedtest_cli
