@@ -1,3 +1,3 @@
 #!/bin/bash
 
-mpv $2 --start=$1 --pause &
+mpv "$2" --start=$1 --pause &
