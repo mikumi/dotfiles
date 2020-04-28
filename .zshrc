@@ -44,8 +44,6 @@ setopt hist_ignore_space
 setopt inc_append_history
 setopt share_history
 
-PROMPT='%{$fg[cyan]%}%c %{$fg_bold[blue]%}% %{$fg_bold[blue]%}$(git_prompt_info) %{$reset_color%}'
-RPROMPT='${DOCKER_MACHINE_NAME} [%{$fg[gray]%}%M %{$fg_bold[blue]%}%@]'
 
 # Google Cloud SDK
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
@@ -55,3 +53,5 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 #[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+
+source ./.spaceship

@@ -22,6 +22,6 @@ antigen bundles <<EOBUNDLES
     vagrant
 EOBUNDLES
 
-antigen theme robbyrussell
+antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
