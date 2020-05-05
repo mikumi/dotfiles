@@ -34,3 +34,6 @@ SPACESHIP_PROMPT_ORDER=(
     exit_code       # Exit code section
     char            # Prompt character
 )
+
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_FORMAT=%t
