@@ -1,8 +1,9 @@
 if [[ `uname` == 'Darwin' ]] ; then
-    alias ll='ls -f -lah'
+    alias ll='colorls -lah'
 else
-    alias ll='ls -lah'
+    alias ll='colorls -lah'
 fi
+alias ls='colorls'
 
 alias appcode='open -a AppCode'
 if [ -x "$(command -v ccat)" ]; then
