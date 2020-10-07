@@ -9,6 +9,9 @@ echo ""
 brew cask install 1password
 brew cask install alfred
 brew cask install dropbox
+brew cask install hyper
+brew cask install font-fira-code
+brew cask install font-hack-nerd-font
 brew cask install sublime-text
 
 # DEVELOPMENT AND OTHER DAILY STUFF
@@ -36,7 +39,6 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew cask install iina
     brew cask install imageoptim
     brew cask install intel-power-gadget
-    brew cask install iterm2
     brew cask install jetbrains-toolbox
     brew cask install keepingyouawake
     brew cask install macvim
