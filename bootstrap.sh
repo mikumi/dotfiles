@@ -5,6 +5,7 @@ function doIt() {
         # Install homebrew
         echo "Installing homebrew..."
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        brew tap homebrew/cask-fonts
 
         # Configure OS X
         echo "Configuring OS X..."
@@ -58,6 +59,7 @@ function doIt() {
         .ec2cfg \
         .functions \
         .gitconfig \
+        .hyper.js \
         .ideavimrc \
         .npmrc \
         .spaceship \
