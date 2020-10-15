@@ -11,6 +11,7 @@ echo ""
 brew install antigen
 brew install ccat # color cat
 brew install dockutil
+brew install exa
 brew install fzf
 brew install git
 brew install git-lfs

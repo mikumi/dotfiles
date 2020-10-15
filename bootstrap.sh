@@ -44,8 +44,6 @@ function doIt() {
         sh install-brews.sh $INSTALLATION_TYPE
     fi
 
-    gem install colorls
-
     # Install Vundle package manager for VIM
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
