@@ -47,6 +47,7 @@ if [ "$INSTALLATION_TYPE" != "BASIC" ]; then
     brew cask install sip
     brew cask install sketch
     brew cask install slack
+    brew cask install tg-pro
     brew cask install turbo-boost-switcher
     brew cask install visual-studio-code
     brew cask install webstorm
