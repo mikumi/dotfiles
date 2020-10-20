@@ -88,6 +88,11 @@ function doIt() {
 
     vim +PluginInstall +qall
 
+    mkdir -p ~/.hyper_plugins
+    cd ~/.hyper_plugins
+    ln -s ~/dotfiles/.hyper_plugins/local
+    cd
+
     chsh -s /bin/zsh
 
     if [[ `uname` == 'Darwin' ]] ; then
