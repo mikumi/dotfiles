@@ -22,6 +22,6 @@ antigen bundles <<EOBUNDLES
     vagrant
 EOBUNDLES
 
-antigen theme denysdovhan/spaceship-prompt
+antigen theme romkatv/powerlevel10k
 
 antigen apply

@@ -62,6 +62,7 @@ function doIt() {
         .hyper.js \
         .ideavimrc \
         .npmrc \
+        .p10k.zsh
         .spaceship \
         .s3cfg \
         .tmux.conf \
