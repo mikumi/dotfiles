@@ -98,8 +98,8 @@
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    time                    # current time
     mkdocker
+    time                    # current time
     # =========================[ Line #2 ]=========================
     newline
     # ip                    # ip address and bandwidth usage for a specified network interface
@@ -1592,7 +1592,7 @@
     else
       docker_host=$DOCKER_MACHINE_NAME
     fi
-    p10k segment -i ' ' -b blue -f white -t ${docker_host} 
+    p10k segment -i ' ' -b blue -f white -t ${docker_host}
   }
 
   ####################################[ time: current time ]####################################
