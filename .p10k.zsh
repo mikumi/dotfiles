@@ -99,6 +99,7 @@
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
     time                    # current time
+    mkdocker
     # =========================[ Line #2 ]=========================
     newline
     # ip                    # ip address and bandwidth usage for a specified network interface
@@ -1580,6 +1581,19 @@
   #   P9K_WIFI_RSSI         | signal strength in dBm, from -120 to 0
   #   P9K_WIFI_NOISE        | noise in dBm, from -120 to 0
   #   P9K_WIFI_BARS         | signal strength in bars, from 0 to 4 (derived from P9K_WIFI_RSSI and P9K_WIFI_NOISE)
+
+  ###################################[  MK Docker Prompt  ]#####################################
+
+  function prompt_mkdocker() {
+    local docker_host=
+    if test -z "$DOCKER_MACHINE_NAME"; then
+      docker_host=
+      return
+    else
+      docker_host=$DOCKER_MACHINE_NAME
+    fi
+    p10k segment -i ' ' -b blue -f white -t ${docker_host} 
+  }
 
   ####################################[ time: current time ]####################################
   # Current time color.
