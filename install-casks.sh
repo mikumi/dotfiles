@@ -91,7 +91,6 @@ if [ "$INSTALLATION_TYPE" == "FULL" ]; then
     brew cask install spotify
     brew cask install steveschow-gfxcardstatus
     brew cask install upwork
-    brew cask install xbench
 fi
 
 brew doctor
