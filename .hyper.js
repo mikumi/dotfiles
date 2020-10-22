@@ -9,23 +9,24 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 13,
+    fontSize: 14,
 
     // font family with optional fallbacks
     // fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
-    fontFamily: '"Hack Nerd Font"',
+    // fontFamily: '"Fira Code", "Hack Nerd Font"',
+    fontFamily: '"Hack Nerd Font Mono"',
 
     // default font weight: 'normal' or 'bold'
-    fontWeight: 'normal',
+    fontWeight: 'bold',
 
     // font weight for bold characters: 'normal' or 'bold'
     fontWeightBold: 'bold',
 
     // line height as a relative unit
-    lineHeight: 1.1,
+    lineHeight: 1.0,
 
     // letter spacing as a relative unit
-    letterSpacing: 1,
+    letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
     cursorColor: '#CCCCCC',
