@@ -1,4 +1,4 @@
-source /usr/local/share/antigen/antigen.zsh
+source "$BREW_PREFIX/share/antigen/antigen.zsh"
 antigen init ~/.antigenrc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -51,8 +51,8 @@ setopt share_history
 
 # Google Cloud SDK
 export CLOUDSDK_PYTHON=python2
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 
 # Configure NVM
 source ~/bin/lazynvm.sh
