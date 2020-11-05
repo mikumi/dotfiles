@@ -32,18 +32,6 @@ set ignorecase
 set smartcase
 set encoding=utf-8
 set nowrap
-
-
-" Font and colors
-if has('gui_running')
-    set background=light
-else
-    " Terminal colors will be used
-    set background=dark
-endif
-let g:solarized_termtrans=1 " Fixes background color with Blink/Mosh
-colorscheme solarized
-set guifont=Menlo:h12
 set colorcolumn=81
 
 
