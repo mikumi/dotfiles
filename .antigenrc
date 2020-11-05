@@ -2,26 +2,36 @@ antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
     adb
-    ant
-    # diskutil
+    aws
+    brew
     docker
     docker-compose
-    leonhartX/docker-machine-zsh-completion
+    docker-machine
+    fzf
     gem
+    gcloud
     git
     gradle
-    supercrabtree/k
+    #kubectl # takes > 100ms to load
+    minikube
+    mosh
     mvn
-    osx
+    nmap
+    npm
+    node
     pod
-    rbenv
     rsync
     screen
-    zsh-users/zsh-completions
-    zsh-users/zsh-syntax-highlighting
-    vagrant
+    yarn
 EOBUNDLES
+
+AUTO_LOAD_NVMRC_FILES=true
+
+antigen bundle mafredri/zsh-async
+antigen bundle allanjamesvestal/fast-zsh-nvm
+antigen bundle zsh-users/zsh-syntax-highlighting
 
 antigen theme romkatv/powerlevel10k
 
 antigen apply
+

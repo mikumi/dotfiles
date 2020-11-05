@@ -36,7 +36,6 @@ fi
 # Local profile
 [[ -f ~/.localrc ]] && source ~/.localrc
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous
