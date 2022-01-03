@@ -1,19 +1,23 @@
-alias ll='exa -lag --git --icons'
 alias ls='exa -g --git --icons'
+alias ll='ls -la'
+alias llt='ll --sort newest'
 
 alias appcode='open -a AppCode'
 if [ -x "$(command -v ccat)" ]; then
     alias cat=ccat
 fi
+
+alias bex='bundle install'
+alias cl=clear
 alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -iname \*.c -o -iname \*.swift -o -iname \*.cc -o -iname \*.h \) -exec wc -l '{}' \+"
 alias docker-compose-prod="docker-compose -f docker-compose.yml -f docker-compose.prod.yml"
 alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias finder='open -a Finder'
 alias ij='open -a "IntelliJ IDEA 14 CE"'
-alias llt='ls -la --sort newest'
 alias mikenv='LC_CTYPE=en_US.UTF-8 mosh --ssh="ssh -p 2222" mikumi@mikenv.michael-kuck.com -- sh -c "tmux attach -t base || tmux new -s base"'
 alias mvi='mvim'
 alias plist='plutil -convert xml1 -o /dev/stdout'
+alias pycharm='open -a PyCharm'
 alias sl='open -a "Sublime Text.app"'
 alias slcopy='pbcopy && tmpfile=$(mktemp /tmp/slcopy.XXXXXX) && pbpaste > $tmpfile && sl $tmpfile'
 alias st='open -a SourceTree'
@@ -22,4 +26,4 @@ alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pb
 alias vi=vim
 alias webstorm='open -a WebStorm'
 alias vscode='open -a "Visual Studio Code"'
-
+alias vscopy='pbcopy && tmpfile=$(mktemp /tmp/slcopy.XXXXXX) && pbpaste > $tmpfile && code $tmpfile'
