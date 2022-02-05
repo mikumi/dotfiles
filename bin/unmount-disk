@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if diskutil unmount $1 ; then
+if diskutil unmount "$1" ; then
     exit
 fi
 
@@ -8,7 +8,7 @@ read -p "Force quit process and retry? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    BLOCKING_PID=$(diskutil unmount $1  2> >(sed 's/.*PID\ \([0-9]*\)\ .*/\1/g'))
-    kill -9 $BLOCKING_PID && diskutil unmount $1
+    BLOCKING_PID=$(diskutil unmount "$1"  2> >(sed 's/.*PID\ \([0-9]*\)\ .*/\1/g'))
+    kill -9 $BLOCKING_PID && diskutil unmount "$1"
 fi
 
