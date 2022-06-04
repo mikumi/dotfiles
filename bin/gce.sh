@@ -4,19 +4,20 @@ set -e # exit on error
 
 # NOTE: This requires GNU getopt.  On Mac OS X and FreeBSD, you have to install this
 # separately via brew.
-TEMP=$(/usr/local/opt/gnu-getopt/bin/getopt -o vdm: --long name:,machine:,gpu:,project:,region:,zone:,serviceaccount:,help,preemptible,disktype:,disksize: \
+TEMP=$(/opt/homebrew/opt/gnu-getopt/bin/getopt -o vdm: --long name:,machine:,gpucount:,gpu:,project:,region:,zone:,serviceaccount:,help,preemptible,disktype:,disksize: \
               -n 'gce' -- "$@")
 
 usage() {
   echo "Usage: --name <instance name>
-       --machine <machine type> 
+       --machine <machine type>
        --disktype <disk type>
        --disksize <disk size in GB>
-       --project <project-id> 
-       --region <region> 
-       --zone <zone> 
-       --serviceaccount <service account email> 
-       [ --gpu <gpu type> ] 
+       --project <project-id>
+       --region <region>
+       --zone <zone>
+       --serviceaccount <service account email>
+       [ --gpucount <gpu count> ]
+       [ --gpu <gpu type> ]
        <action>"
 }
 
@@ -34,6 +35,7 @@ ZONE=""
 SERVICE_ACCOUNT=""
 DISK_TYPE="pd-balanced"
 DISK_SIZE="64"
+GPU_COUNT="1"
 MISC_OPTIONS=""
 
 while true; do
@@ -47,8 +49,9 @@ while true; do
     --region ) REGION="$2"; shift 2 ;;
     --zone ) ZONE="$2"; shift 2 ;;
     --serviceaccount ) SERVICE_ACCOUNT="$2"; shift 2 ;;
+    --gpucount ) GPU_COUNT="$2"; shift 2 ;;
     --gpu )
-      MISC_OPTIONS="$MISC_OPTIONS --accelerator=count=1,type=$2"; shift 2 ;;
+      MISC_OPTIONS="$MISC_OPTIONS --accelerator=count=$GPU_COUNT,type=$2"; shift 2 ;;
     --preemptible )
       MISC_OPTIONS="$MISC_OPTIONS --no-restart-on-failure --preemptible"; shift ;;
     -- ) shift; break ;;
