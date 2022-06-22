@@ -3,7 +3,7 @@
 	name = Michael Kuck
 [core]
 	autocrlf = input
-	excludesfile = /Users/michaelkuck/.gitignore_global
+	excludesFile = ~/.gitignore
 	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
