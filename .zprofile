@@ -22,6 +22,7 @@ if [[ `uname` == 'Darwin' ]] ; then
     export PATH=$GEM_HOME/bin:$PATH
 fi
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
 export BREW_PREFIX=$(brew --prefix)
 
 # Add /usr/local/sbin to path for those rare brews
