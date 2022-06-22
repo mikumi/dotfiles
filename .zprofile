@@ -27,3 +27,4 @@ export BREW_PREFIX=$(brew --prefix)
 
 # Add /usr/local/sbin to path for those rare brews
 export PATH="$BREW_PREFIX/sbin:$PATH"
+eval "$(pyenv init --path)"
