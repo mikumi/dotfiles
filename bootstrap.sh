@@ -11,18 +11,8 @@ function doIt() {
         echo "Configuring OS X..."
         sh .macos
 
-        # Install Mac App Store apps
-        echo "Installing Mac App Store apps..."
-        brew install mas
-        sh install-mas.sh $INSTALLATION_TYPE $EMAIL_DE $EMAIL_US
-
-        # Install brews
-        echo "Installing brews..."
-        sh install-brews.sh $INSTALLATION_TYPE
-
-        # Install casks
-        echo "Installing casks..."
-        sh install-casks.sh $INSTALLATION_TYPE
+        # Install apps
+        brew bundle install Brewfile
     fi
 
     if [[ `uname` == 'Linux' ]] ; then
@@ -39,9 +29,8 @@ function doIt() {
         eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
         brew install gcc@7
 
-        # Install brews
-        echo "Installing brews..."
-        sh install-brews.sh $INSTALLATION_TYPE
+        # Install apps
+        brew bundle install Brewfile
     fi
 
     # Install Vundle package manager for VIM
