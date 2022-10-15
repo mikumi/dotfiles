@@ -1588,11 +1588,13 @@
 
   function prompt_mkdocker() {
     local docker_host=
-    if test -z "$DOCKER_MACHINE_NAME"; then
+    if [ "$(docker context show)" != "default" ]; then
+      docker_host="$(docker context show)"
+    elif [ ! -z "$DOCKER_MACHINE_NAME" ]; then
+      docker_host=$DOCKER_MACHINE_NAME
+    else
       docker_host=
       return
-    else
-      docker_host=$DOCKER_MACHINE_NAME
     fi
     p10k segment -i ' ' -b blue -f white -t ${docker_host}
   }
