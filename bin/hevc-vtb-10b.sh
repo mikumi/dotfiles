@@ -1,0 +1,1 @@
+cs=$(get-colorspace.sh "$1") && time ffmpeg -i "$1" -c:v hevc_videotoolbox -q:v $2 -pix_fmt p010le -color_primaries "$cs" -color_trc "$cs" -colorspace "$cs" -tag:v hvc1 -profile:v main10 "$1"_hevc-vtb-$2_10b.mp4
