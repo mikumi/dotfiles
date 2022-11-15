@@ -25,13 +25,14 @@ antigen bundles <<EOBUNDLES
     yarn
 EOBUNDLES
 
-AUTO_LOAD_NVMRC_FILES=true
-
-antigen bundle mafredri/zsh-async
-antigen bundle allanjamesvestal/fast-zsh-nvm
+antigen bundle Aloxaf/fzf-tab
 antigen bundle zsh-users/zsh-syntax-highlighting
-
 antigen theme romkatv/powerlevel10k
+
+# Auto load NVM
+export AUTO_LOAD_NVMRC_FILES=true
+antigen bundle mafredri/zsh-async # required for fast-zsh-nvm
+antigen bundle allanjamesvestal/fast-zsh-nvm
 
 antigen apply
 

@@ -22,9 +22,13 @@ if [[ `uname` == 'Darwin' ]] ; then
     export PATH=$GEM_HOME/bin:$PATH
 fi
 
+# hombrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export BREW_PREFIX=$(brew --prefix)
-
 # Add /usr/local/sbin to path for those rare brews
 export PATH="$BREW_PREFIX/sbin:$PATH"
-eval "$(pyenv init --path)"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

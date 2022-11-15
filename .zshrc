@@ -35,7 +35,7 @@ fi
 # Local profile
 [[ -f ~/.localrc ]] && source ~/.localrc
 
-
+# ZSH History
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous
 # event).
@@ -60,6 +60,7 @@ source ~/bin/lazynvm.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Load various completions
 source <(kubectl completion zsh)
 source  <(doctl completion zsh)
 
