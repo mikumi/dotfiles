@@ -75,3 +75,14 @@ export FZF_DEFAULT_OPTS='--height 80% --border'
 # Zoxide
 eval "$(zoxide init zsh)"
 
+## fzf-tab
+fzf-cd-dir() {
+   zi
+}
+zle -N fzf-cd-dir
+bindkey '^e' fzf-cd-dir
+
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-min-size 50 8
+zstyle ':fzf-tab:*' fzf-min-height 8
+zstyle ':fzf-tab:*' fzf-pad 4
