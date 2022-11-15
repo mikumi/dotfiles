@@ -68,3 +68,6 @@ source  <(doctl completion zsh)
 export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# FZF Fuzzy matching
+export FZF_DEFAULT_OPTS='--height 80% --border'
