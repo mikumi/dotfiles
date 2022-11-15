@@ -71,3 +71,7 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # FZF Fuzzy matching
 export FZF_DEFAULT_OPTS='--height 80% --border'
+
+# Zoxide
+eval "$(zoxide init zsh)"
+
