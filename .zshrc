@@ -57,6 +57,9 @@ source ~/bin/lazynvm.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Turn off home brew auto updates
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 # Load various completions
 source <(kubectl completion zsh)
 source  <(doctl completion zsh)
