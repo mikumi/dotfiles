@@ -39,7 +39,7 @@ fi
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous
 # event).
-export HISTSIZE=100000
+export HISTSIZE=500000
 export SAVEHIST=$HISTSIZE
 setopt HIST_IGNORE_ALL_DUPS
 setopt extended_history
