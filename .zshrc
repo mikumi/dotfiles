@@ -11,9 +11,6 @@ fi
 # Colors
 export CLICOLOR=1
 
-# AWS
-export AWS_DEFAULT_PROFILE=personal
-
 # Local bin
 export PATH=$PATH:~/bin
 
