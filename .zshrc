@@ -36,6 +36,7 @@ fi
 # event).
 export HISTSIZE=500000
 export SAVEHIST=$HISTSIZE
+export HISTFILE=~/.zsh_history
 setopt HIST_IGNORE_ALL_DUPS
 setopt extended_history
 setopt hist_expire_dups_first
