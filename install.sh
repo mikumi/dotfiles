@@ -119,7 +119,6 @@ function installVundle() {
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
-  vim +PluginInstall +qall
 }
 
 function installTPM() {
