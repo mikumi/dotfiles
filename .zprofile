@@ -23,7 +23,9 @@ if [[ `uname` == 'Darwin' ]] ; then
 fi
 
 # hombrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Intel based macs and Apple Silicon based macs have different homebrew paths
+local HOMEBREW_PATH=$(if [ -f "/usr/local/bin/brew" ]; then echo "/usr/local/bin/brew"; else echo "/opt/homebrew/bin/brew"; fi)
+eval "$($HOMEBREW_PATH shellenv)"
 export BREW_PREFIX=$(brew --prefix)
 # Add /usr/local/sbin to path for those rare brews
 export PATH="$BREW_PREFIX/sbin:$PATH"
