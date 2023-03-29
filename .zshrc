@@ -1,4 +1,5 @@
-source "$BREW_PREFIX/share/antigen/antigen.zsh"
+local ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then echo "$BREW_PREFIX/share/antigen/antigen.zsh"; else echo ~/antigen.zsh; fi)
+source "$ANTIGEN_PATH"
 antigen init ~/.antigenrc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
