@@ -41,7 +41,7 @@ function installMacOS() {
 
 function installLinux() {
   echo "Installing basics..."
-  #$SUDO apt update
+  $SUDO apt update
   $SUDO apt install -y \
     build-essential \
     curl \
