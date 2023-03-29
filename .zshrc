@@ -82,7 +82,7 @@ fzf-cd-dir() {
 zle -N fzf-cd-dir
 bindkey '^e' fzf-cd-dir
 
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-command
 zstyle ':fzf-tab:*' popup-min-size 50 8
 zstyle ':fzf-tab:*' fzf-min-height 8
 zstyle ':fzf-tab:*' fzf-pad 4
