@@ -46,10 +46,12 @@ setopt inc_append_history
 setopt share_history
 
 # Google Cloud SDK
-export CLOUDSDK_PYTHON=python3
-source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+if command -v gcloud &> /dev/null; then
+  export CLOUDSDK_PYTHON=python3
+  source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+  export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+fi
 
 # Configure NVM
 source ~/bin/lazynvm.sh
@@ -61,8 +63,12 @@ source ~/bin/lazynvm.sh
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # Load various completions
-source <(kubectl completion zsh)
-source  <(doctl completion zsh)
+if command -v kubectl &> /dev/null; then
+  source <(kubectl completion zsh)
+fi
+if command -v doctl &> /dev/null; then
+  source  <(doctl completion zsh)
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"

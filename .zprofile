@@ -25,12 +25,16 @@ fi
 # hombrew
 # Intel based macs and Apple Silicon based macs have different homebrew paths
 local HOMEBREW_PATH=$(if [ -f "/usr/local/bin/brew" ]; then echo "/usr/local/bin/brew"; else echo "/opt/homebrew/bin/brew"; fi)
-eval "$($HOMEBREW_PATH shellenv)"
+if command -v $HOMEBREW_PATH &> /dev/null; then
+    eval "$($HOMEBREW_PATH shellenv)"
+fi
 export BREW_PREFIX=$(brew --prefix)
 # Add /usr/local/sbin to path for those rare brews
 export PATH="$BREW_PREFIX/sbin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if command -v pyenv &> /dev/null; then
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
