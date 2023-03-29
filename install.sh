@@ -110,14 +110,17 @@ function cloneDotfiles() {
 }
 
 function installVundle() {
-  echo "Installing Vundle plugin manager for VIM..."
-  git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
+  if [ ! -d "~/.vim/bundle/Vundle.vim" ]; then
+    echo "Installing Vundle plugin manager for VIM..."
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  fi
   vim +PluginInstall +qall
 }
 
 function installTPM() {
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  if [ ! -d "~/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 }
 
 function installHyper() {
