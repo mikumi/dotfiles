@@ -58,7 +58,7 @@ function installLinux() {
 
   installCommon
 
-  chsh -s /bin/zsh
+  $SUDO chsh -s /bin/zsh $(whoami)
 }
 
 function installCommon() {
