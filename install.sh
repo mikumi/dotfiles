@@ -45,6 +45,7 @@ function installLinux() {
   $SUDO apt install -y \
     build-essential \
     curl \
+    exa \
     git \
     libz-dev \
     locales \
