@@ -45,12 +45,13 @@ function installLinux() {
   $SUDO apt install -y \
     build-essential \
     curl \
-    zsh \
-    locales \
     git \
-    sshfs \
     libz-dev \
-    vim
+    locales \
+    sshfs \
+    tmux \
+    vim \
+    zsh
   $SUDO locale-gen en_US.UTF-8
 
   # installRubyLinux
