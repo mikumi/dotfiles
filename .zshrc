@@ -15,9 +15,6 @@ export CLICOLOR=1
 # Local bin
 export PATH=$PATH:~/bin
 
-# Aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
-
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -87,3 +84,6 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' popup-min-size 50 8
 zstyle ':fzf-tab:*' fzf-min-height 8
 zstyle ':fzf-tab:*' fzf-pad 4
+# Aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+
