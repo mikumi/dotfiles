@@ -89,3 +89,5 @@ zstyle ':fzf-tab:*' fzf-pad 4
 # Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
+# Github Copilot
+eval "$(github-copilot-cli alias -- "$0")"
