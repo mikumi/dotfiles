@@ -5,9 +5,7 @@ Here I keep track of my various [dotfiles](https://dotfiles.github.io). Mostly f
 # Bootstrap new machine
 
 ```
-git clone https://github.com/mikumi/dotfiles ~/dotfiles
-cd ~/dotfiles
-sh bootstrap.sh
+curl -o- https://raw.githubusercontent.com/mikumi/dotfiles/master/install.sh | bash
 ```
 
 
