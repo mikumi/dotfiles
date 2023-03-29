@@ -49,6 +49,7 @@ setopt share_history
 export CLOUDSDK_PYTHON=python3
 source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
 source "$BREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 # Configure NVM
 source ~/bin/lazynvm.sh
