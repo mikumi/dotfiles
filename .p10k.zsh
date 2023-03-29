@@ -1587,6 +1587,10 @@
   ###################################[  MK Docker Prompt  ]#####################################
 
   function prompt_mkdocker() {
+    if ! command -v docker &> /dev/null; then
+      return
+    fi
+
     local docker_host=
     if [ "$(docker context show)" != "default" ]; then
       docker_host="$(docker context show)"
