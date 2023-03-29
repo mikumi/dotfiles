@@ -97,3 +97,6 @@ zstyle ':fzf-tab:*' fzf-pad 4
 
 # Github Copilot
 eval "$(github-copilot-cli alias -- "$0")"
+
+# AWS CLI
+export AWS_PAGER="" # This disables the output pager for aws cli, extremely annoying
