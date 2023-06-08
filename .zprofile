@@ -24,7 +24,7 @@ fi
 
 # hombrew
 # Intel based macs and Apple Silicon based macs have different homebrew paths
-local HOMEBREW_PATH=$(if [ -f "/usr/local/bin/brew" ]; then echo "/usr/local/bin/brew"; else echo "/opt/homebrew/bin/brew"; fi)
+local HOMEBREW_PATH=$(if [ -f "/opt/homebrew/bin/brew" ]; then echo "/opt/homebrew/bin/brew"; else echo "/usr/local/bin/brew"; fi)
 if command -v $HOMEBREW_PATH &> /dev/null; then
     eval "$($HOMEBREW_PATH shellenv)"
 fi
