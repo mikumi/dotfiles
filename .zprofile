@@ -27,10 +27,10 @@ fi
 local HOMEBREW_PATH=$(if [ -f "/opt/homebrew/bin/brew" ]; then echo "/opt/homebrew/bin/brew"; else echo "/usr/local/bin/brew"; fi)
 if command -v $HOMEBREW_PATH &> /dev/null; then
     eval "$($HOMEBREW_PATH shellenv)"
+    export BREW_PREFIX=$(brew --prefix)
+    # Add /usr/local/sbin to path for those rare brews
+    export PATH="$BREW_PREFIX/sbin:$PATH"
 fi
-export BREW_PREFIX=$(brew --prefix)
-# Add /usr/local/sbin to path for those rare brews
-export PATH="$BREW_PREFIX/sbin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
