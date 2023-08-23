@@ -20,12 +20,19 @@ function main() {
 function installMacOS() {
   # Install homebrew
   echo "Installing homebrew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  sudo echo -n
+  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/parallels/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
   brew tap homebrew/cask-fonts
+
+  # Install apps
+  installCommon
+  brew bundle install --file=dotfiles/Brewfile.minimal
 
   # Configure OS X
   echo "Configuring OS X..."
-  sh .macos
+  sh dotfiles/.macos
 
   # Install apps
   # brew bundle install Brewfile
@@ -119,6 +126,7 @@ function installVundle() {
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
+  vim +PluginInstall +qall
 }
 
 function installTPM() {
@@ -165,11 +173,11 @@ function linkDotfiles() {
   done
   unset dotfiles file
 
-  ln -s "$DOTFILES/bin"
+  ln -s $DOTFILES/bin
 
   mkdir -p .gradle
   cd .gradle
-  rm gradle.properties; ln -s "$DOTFILES/.gradle/gradle.properties"
+  rm gradle.properties; ln -s $DOTFILES/.gradle/gradle.properties
   cd ~
 }
 
