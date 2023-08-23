@@ -1,13 +1,14 @@
 [user]
 	email = me@michael-kuck.com
 	name = Michael Kuck
+	signingkey = /Users/michael/.ssh/id_rsa.pub
 [core]
 	autocrlf = input
 	excludesFile = ~/.gitignore
 	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -22,3 +23,6 @@
 	process = git-lfs filter-process
 [commit]
 	template = /Users/michaelkuck/.stCommitMsg
+	gpgsign = true
+[gpg]
+	format = ssh
