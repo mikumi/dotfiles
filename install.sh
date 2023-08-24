@@ -181,7 +181,9 @@ function linkDotfiles() {
 
   mkdir -p .gradle
   cd .gradle
+  set +e # don't exit on error
   rm gradle.properties; ln -s $DOTFILES/.gradle/gradle.properties
+  set -e # exit on error
   cd ~
 }
 
