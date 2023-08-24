@@ -128,7 +128,7 @@ function installVundle() {
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
-  vim +PluginInstall +qall
+  # vim +'PluginInstall --sync' +qall # Disabled as it messed up the terminal if run inside a script. Will install anyway when vim is opened
 }
 
 function installTPM() {
