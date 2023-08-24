@@ -23,7 +23,7 @@ function installMacOS() {
   # Install homebrew
   echo "Installing homebrew..."
   sudo echo -n
-  # /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/parallels/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
   brew tap homebrew/cask-fonts
