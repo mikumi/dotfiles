@@ -170,7 +170,9 @@ function linkDotfiles() {
       .zprofile
   )
   for file in ${dotfiles[@]} ; do
+      set +e # don't exit on error
       rm $file
+      set -e # exit on error
       ln -s $DOTFILES/$file
   done
   unset dotfiles file
