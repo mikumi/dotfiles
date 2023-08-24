@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e # exit on error
+
 echo "Installing dotfiles..."
 
 DOTFILES=$HOME/dotfiles
