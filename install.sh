@@ -30,19 +30,17 @@ function installMacOS() {
 
   # Install apps
   installCommon
+  set +e # don't exit on error. e.g. macOS VMs can't install apps from App Stores
   brew bundle install --file=dotfiles/Brewfile.minimal
+  set -e # exit on error
 
   # Configure OS X
   echo "Configuring OS X..."
   sh dotfiles/.macos
 
-  # Install apps
-  # brew bundle install Brewfile
-  installCommon
-
-  dockutil --remove all --no-restart
-  sh dotfiles/configure-dock.sh
-  killall Dock
+  # # dockutil --remove all --no-restart
+  # # sh dotfiles/configure-dock.sh
+  # # killall Dock
 
   chflags hidden bin
   chflags hidden dotfiles
@@ -128,6 +126,7 @@ function installVundle() {
     echo "Installing Vundle plugin manager for VIM..."
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
   fi
+  #nvim --headless +PluginInstall +qall
   # vim +'PluginInstall --sync' +qall # Disabled as it messed up the terminal if run inside a script. Will install anyway when vim is opened
 }
 
