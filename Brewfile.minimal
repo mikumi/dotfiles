@@ -49,6 +49,8 @@ brew "vim"
 brew "watch"
 brew "watchman"
 brew "yt-dlp"
+brew "zoxide"
+
 brew "cloudflare/cloudflare/cloudflared", link: false
 
 cask "1password"
