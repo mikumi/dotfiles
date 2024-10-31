@@ -6,6 +6,7 @@
 	autocrlf = input
 	excludesFile = ~/.gitignore
 	editor = vim
+	pager = 
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
