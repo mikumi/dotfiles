@@ -1,4 +1,4 @@
-alias ls='exa -g --git --icons'
+alias ls='eza -g --git --icons'
 alias ll='ls -la'
 alias llt='ll --sort newest'
 
@@ -13,6 +13,7 @@ alias count-source="find . \( -iname \*.java -o -iname \*.m -o -iname \*.mm -o -
 alias docker-compose-prod="docker-compose -f docker-compose.yml -f docker-compose.prod.yml"
 alias dstats='docker stats $(docker ps --format={{.Names}})'
 alias finder='open -a Finder'
+alias fl='open -a Forklift'
 alias ij='open -a "IntelliJ IDEA 14 CE"'
 alias k='kubectl'
 alias k9='kill -9'
@@ -27,6 +28,7 @@ alias t='tmux attach -t base || tmux new -s base'
 alias trem='tmux attach -t remote || tmux new -s remote'
 alias uuid="python -c 'import sys,uuid; sys.stdout.write(uuid.uuid4().hex)' | pbcopy && pbpaste && echo"
 alias vi=vim
-alias webstorm='open -a WebStorm'
 alias vscode='open -a "Visual Studio Code"'
 alias vscopy='pbcopy && tmpfile=$(mktemp /tmp/slcopy.XXXXXX) && pbpaste > $tmpfile && code $tmpfile'
+alias webstorm='open -a WebStorm'
+alias xcall='/Applications/xcall.app/Contents/MacOS/xcall'
