@@ -2,11 +2,14 @@ local ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then ec
 source "$ANTIGEN_PATH"
 antigen init ~/.antigenrc
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  source ~/.powerlevel10k/powerlevel10k.zsh-theme
+  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+  # Initialization code that may require console input (password prompts, [y/n]
+  # confirmations, etc.) must go above this block; everything else may go below.
+  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
 fi
 
 # Colors
@@ -56,8 +59,10 @@ fi
 # Configure NVM
 source ~/bin/lazynvm.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ "$TERM_PROGRAM" != "vscode" ]]; then
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # Turn off home brew auto updates
 export HOMEBREW_NO_AUTO_UPDATE=1
@@ -98,3 +103,13 @@ eval "$(github-copilot-cli alias -- "$0")"
 
 # AWS CLI
 export AWS_PAGER="" # This disables the output pager for aws cli, extremely annoying
+
+if [[ "$TERM_PROGRAM" = "vscode" ]]; then
+  autoload -Uz vcs_info
+  precmd() { vcs_info }
+
+  zstyle ':vcs_info:git:*' formats '%b '
+
+  setopt PROMPT_SUBST
+  PROMPT='%F{green}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f$ '
+fi
