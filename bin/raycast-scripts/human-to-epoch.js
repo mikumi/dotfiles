@@ -10,6 +10,7 @@
 // Optional parameters:
 // @raycast.icon ⏱
 // @raycast.needsConfirmation false
+// @raycast.argument1 { "type": "text", "placeholder": "Date or timestamp (optional)", "optional": true }
 //
 // Documentation:
 // @raycast.description Convert between human-readable dates and epoch timestamps.
@@ -23,26 +24,27 @@ const { spawnSync } = require("child_process");
 // 1639633253
 // Thu, 16 Dec 2021 05:40:53 GMT
 
-const clipboard = _pbpaste().trim();
-const stringType = _getStringType(clipboard);
+const argument = process.argv[2];
+const input = argument ? argument.trim() : _pbpaste().trim();
+const stringType = _getStringType(input);
 
 if (stringType === 'epoch_millis') {
-  const date = new Date(parseInt(clipboard));
+  const date = new Date(parseInt(input));
   const result = _formatISOWithTimezone(date);
   _pbcopy(result);
   console.log(result);
   return;
 } else if (stringType === 'epoch') {
-  const date = new Date(parseInt(clipboard) * 1000);
+  const date = new Date(parseInt(input) * 1000);
   const result = _formatISOWithTimezone(date);
   _pbcopy(result);
   console.log(result);
   return;
 }
 
-const timestamp = Date.parse(clipboard);
+const timestamp = Date.parse(input);
 if (isNaN(timestamp)) {
-  console.log("Paste a valid date or timestamp into clipboard");
+  console.log("Provide a valid date or timestamp");
   return;
 }
 _pbcopy(timestamp.toString());
