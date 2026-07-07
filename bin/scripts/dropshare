@@ -1,0 +1,1 @@
+/Applications/Dropshare 5.app/Contents/Resources/ds.sh

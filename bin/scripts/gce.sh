@@ -83,7 +83,7 @@ shutdown () {
   time gcloud compute instances stop "$INSTANCE_NAME" --project="$PROJECT" --zone="$ZONE"
 
   echo "Removing previous snapshot"
-  time gcloud compute snapshots delete "$INSTANCE_NAME" --project="$PROJECT" --quiet
+  time gcloud compute snapshots delete "$INSTANCE_NAME" --project="$PROJECT" --quiet || true
 
   echo "Taking snapshot of disk"
   time gcloud compute disks snapshot "$INSTANCE_NAME" --project="$PROJECT" --snapshot-names="$INSTANCE_NAME" --zone="$ZONE" --storage-location="$REGION"
@@ -116,10 +116,42 @@ start() {
     $MISC_OPTIONS
 }
 
+create_debian_gpu() {
+  if [[ $MACHINE_TYPE == "" ]]; then echo "--machine is required" >&2 ; exit 1 ; fi
+  if [[ $SERVICE_ACCOUNT == "" ]]; then echo "--serviceaccount is required" >&2 ; exit 1 ; fi
+
+  echo MACHINE_TYPE="$MACHINE_TYPE"
+  echo DISK_TYPE="$DISK_TYPE"
+  echo DISK_SIZE="$DISK_SIZE"
+  echo MISC_OPTIONS="$MISC_OPTIONS"
+
+  echo "Creating instance based on from scratch"
+  time gcloud compute instances create "$INSTANCE_NAME" \
+    --project="$PROJECT" \
+    --zone="$ZONE" \
+    --machine-type="$MACHINE_TYPE" \
+    --network-interface=network-tier=PREMIUM,subnet=default \
+    --maintenance-policy=TERMINATE \
+    --service-account="$SERVICE_ACCOUNT" \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --tags=mkg \
+    --create-disk=auto-delete=yes,boot=yes,device-name="$INSTANCE_NAME",image=projects/ml-images/global/images/c0-deeplearning-common-cu113-v20230807-debian-10,mode=rw,size="$DISK_SIZE",type=projects/mk-accel-stream/zones/europe-west4-a/diskTypes/"$DISK_TYPE" \
+    --reservation-affinity=any \
+    $MISC_OPTIONS
+
+  SHUTDOWN_SCRIPT="$HOME/bin/gce-auto-shutdown.sh"
+  gcloud compute instances add-metadata "$INSTANCE_NAME" \
+    --project="$PROJECT" \
+    --zone="$ZONE" \
+    --metadata-from-file startup-script="$SHUTDOWN_SCRIPT"
+}
+
 if [[ $ACTION == "up" ]]; then
   start
 elif [[ $ACTION == "down" ]]; then
   shutdown
+elif [[ $ACTION == "create-debian-gpu" ]]; then
+  create_debian_gpu
 else
-  echo "must specify \"up\" or \"down\""
+  echo "must specify an action"
 fi
