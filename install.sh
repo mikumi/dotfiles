@@ -155,6 +155,9 @@ function linkDotfiles() {
       .ec2cfg \
       .functions \
       .gitconfig \
+      .gitconfig-inline \
+      .gitignore_global \
+      .gitignore_inline
       .hyper.js \
       .ideavimrc \
       .npmrc \
