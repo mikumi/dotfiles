@@ -1,0 +1,500 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+DEFAULT_PREFIX='mk_sandbox'
+DEFAULT_SHELL='/bin/zsh'
+MARKER_FILE='.sandboxer'
+REGISTRY_DIR='/Users/Shared/.sandboxer-users'
+
+CLEANUP_USERNAME=''
+CLEANUP_KEEP='false'
+
+usage() {
+  cat <<'USAGE'
+Usage:
+  sandboxer create [--name <username>] [--full-name <name>] [--shell <path>] [--print-password]
+  sandboxer remove <username> [--keep-home] [--force]
+  sandboxer run [-h|--home] [<username>] [-- <command>]
+  sandboxer once [--name <username>] [--keep] [-- <command>]
+  sandboxer list
+
+Examples:
+  sandboxer create --name mk_sandbox
+  sandboxer run -- zsh -lc 'pwd && whoami'
+  sandboxer run -h -- pwd
+  sandboxer run mk_sandbox -- zsh -lc 'pwd && whoami'
+  sandboxer once -- zsh -lc 'python3 -c "import os; print(os.environ[\"HOME\"])"'
+  sandboxer remove mk_sandbox
+
+Notes:
+  This isolates by macOS user account, not by kernel/container sandboxing.
+  It keeps native GPU access, but world-readable files and normal network access remain available.
+USAGE
+}
+
+die() {
+  echo "sandboxer: $*" >&2
+  exit 1
+}
+
+main() {
+  local action="${1:-}"
+
+  if [[ -z "$action" || "$action" == '--help' || "$action" == '-h' ]]; then
+    usage
+    exit 0
+  fi
+
+  shift
+  _require_macos
+
+  case "$action" in
+    create)
+      _create_command "$@"
+      ;;
+    remove|delete)
+      _remove_command "$@"
+      ;;
+    run|exec)
+      _run_command "$@"
+      ;;
+    once)
+      _once_command "$@"
+      ;;
+    list)
+      _list_command "$@"
+      ;;
+    *)
+      die "unknown action: $action"
+      ;;
+  esac
+}
+
+# ========== Private ==========
+
+_create_command() {
+  local full_name='Michael Sandbox'
+  local print_password='false'
+  local shell_path="$DEFAULT_SHELL"
+  local username="$DEFAULT_PREFIX"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --full-name)
+        full_name="${2:-}"
+        [[ -n "$full_name" ]] || die '--full-name requires a value'
+        shift 2
+        ;;
+      --name)
+        username="${2:-}"
+        [[ -n "$username" ]] || die '--name requires a value'
+        shift 2
+        ;;
+      --print-password)
+        print_password='true'
+        shift
+        ;;
+      --shell)
+        shell_path="${2:-}"
+        [[ -n "$shell_path" ]] || die '--shell requires a value'
+        shift 2
+        ;;
+      --help|-h)
+        usage
+        return 0
+        ;;
+      *)
+        die "unknown create option: $1"
+        ;;
+    esac
+  done
+
+  _create_user "$username" "$full_name" "$shell_path" "$print_password"
+}
+
+_remove_command() {
+  local force='false'
+  local keep_home='false'
+  local username=''
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --force)
+        force='true'
+        shift
+        ;;
+      --keep-home)
+        keep_home='true'
+        shift
+        ;;
+      --help|-h)
+        usage
+        return 0
+        ;;
+      -*)
+        die "unknown remove option: $1"
+        ;;
+      *)
+        [[ -z "$username" ]] || die "unexpected argument: $1"
+        username="$1"
+        shift
+        ;;
+    esac
+  done
+
+  [[ -n "$username" ]] || die 'remove requires a username'
+  _remove_user "$username" "$keep_home" "$force"
+}
+
+_run_command() {
+  local chdir_home='false'
+  local username="$DEFAULT_PREFIX"
+
+  if [[ "${1:-}" == '--help' ]]; then
+    usage
+    return 0
+  fi
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -h|--home)
+        chdir_home='true'
+        shift
+        ;;
+      --)
+        shift
+        break
+        ;;
+      -*)
+        die "unknown run option: $1"
+        ;;
+      *)
+        username="$1"
+        shift
+
+        if [[ "${1:-}" == '--' ]]; then
+          shift
+        fi
+
+        break
+        ;;
+    esac
+  done
+
+  _run_as_user "$username" "$chdir_home" "$@"
+}
+
+_once_command() {
+  local full_name=''
+  local keep='false'
+  local prefix="$DEFAULT_PREFIX"
+  local shell_path="$DEFAULT_SHELL"
+  local username=''
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --full-name)
+        full_name="${2:-}"
+        [[ -n "$full_name" ]] || die '--full-name requires a value'
+        shift 2
+        ;;
+      --keep)
+        keep='true'
+        shift
+        ;;
+      --name)
+        username="${2:-}"
+        [[ -n "$username" ]] || die '--name requires a value'
+        shift 2
+        ;;
+      --prefix)
+        prefix="${2:-}"
+        [[ -n "$prefix" ]] || die '--prefix requires a value'
+        shift 2
+        ;;
+      --shell)
+        shell_path="${2:-}"
+        [[ -n "$shell_path" ]] || die '--shell requires a value'
+        shift 2
+        ;;
+      --)
+        shift
+        break
+        ;;
+      --help|-h)
+        usage
+        return 0
+        ;;
+      -*)
+        die "unknown once option: $1"
+        ;;
+      *)
+        break
+        ;;
+    esac
+  done
+
+  [[ $# -gt 0 ]] || die 'once requires a command'
+
+  if [[ -z "$username" ]]; then
+    username="$(_random_username "$prefix")"
+  fi
+
+  if [[ -z "$full_name" ]]; then
+    full_name="Michael Sandbox $username"
+  fi
+
+  _create_user "$username" "$full_name" "$shell_path" 'false'
+
+  CLEANUP_USERNAME="$username"
+  CLEANUP_KEEP="$keep"
+  trap _cleanup_once EXIT INT TERM
+
+  set +e
+  _run_as_user "$username" 'false' "$@"
+  local status=$?
+  set -e
+
+  trap - EXIT INT TERM
+  _cleanup_once
+
+  return "$status"
+}
+
+_list_command() {
+  [[ $# -eq 0 ]] || die "unexpected list argument: $1"
+
+  _require_commands dscacheutil
+
+  local registry_path
+  local seen_users=''
+  local username
+
+  if [[ -d "$REGISTRY_DIR" ]]; then
+    for registry_path in "$REGISTRY_DIR"/*; do
+      [[ -f "$registry_path" ]] || continue
+      username="${registry_path##*/}"
+      echo "$username"
+      seen_users="${seen_users} ${username} "
+    done
+  fi
+
+  while IFS= read -r username; do
+    if [[ "$seen_users" != *" ${username} "* ]]; then
+      echo "$username"
+    fi
+  done < <(dscacheutil -q user | awk -v prefix="$DEFAULT_PREFIX" '$1 == "name:" && index($2, prefix) == 1 { print $2 }')
+}
+
+_cleanup_once() {
+  if [[ -z "$CLEANUP_USERNAME" || "$CLEANUP_KEEP" == 'true' ]]; then
+    return 0
+  fi
+
+  _remove_user "$CLEANUP_USERNAME" 'false' 'false'
+  CLEANUP_USERNAME=''
+}
+
+_create_user() {
+  local username="$1"
+  local full_name="$2"
+  local shell_path="$3"
+  local print_password="$4"
+  local home_dir="/Users/$username"
+  local password
+
+  _require_commands sysadminctl dscl openssl sudo id
+  _validate_username "$username"
+  [[ -x "$shell_path" ]] || die "shell does not exist or is not executable: $shell_path"
+
+  if _user_exists "$username"; then
+    die "user already exists: $username"
+  fi
+
+  password="$(openssl rand -base64 32)"
+
+  if ! sudo sysadminctl \
+    -addUser "$username" \
+    -fullName "$full_name" \
+    -shell "$shell_path" \
+    -password "$password" \
+    -home "$home_dir"; then
+    die "failed to create user: $username"
+  fi
+
+  if ! _user_exists "$username"; then
+    die "failed to create user record: $username"
+  fi
+
+  sudo dscl . create "/Users/$username" IsHidden 1
+  sudo dscl . create "/Users/$username" NFSHomeDirectory "$home_dir"
+  sudo dscl . create "/Users/$username" UserShell "$shell_path"
+  sudo mkdir -p "$home_dir"
+  sudo touch "$home_dir/$MARKER_FILE"
+  sudo chown -R "$username:$(id -gn "$username")" "$home_dir"
+  sudo chmod 700 "$home_dir"
+  sudo chflags hidden "$home_dir" 2>/dev/null || true
+  sudo mkdir -p "$REGISTRY_DIR"
+  echo "$home_dir" | sudo tee "$(_registry_path "$username")" >/dev/null
+  sudo chmod 755 "$REGISTRY_DIR"
+  sudo chmod 644 "$(_registry_path "$username")"
+
+  echo "Created hidden sandbox user: $username"
+  echo "Home: $home_dir"
+
+  if [[ "$print_password" == 'true' ]]; then
+    echo "Password: $password"
+  fi
+}
+
+_remove_user() {
+  local username="$1"
+  local keep_home="$2"
+  local force="$3"
+  local home_dir
+
+  _require_commands sysadminctl sudo dscacheutil id
+  _validate_username "$username"
+
+  if ! _user_exists "$username"; then
+    die "user does not exist: $username"
+  fi
+
+  home_dir="$(_home_for_user "$username")"
+  _assert_managed_user "$username" "$home_dir" "$force"
+
+  if [[ "$keep_home" == 'true' ]]; then
+    sudo sysadminctl -deleteUser "$username" -keepHome
+    sudo rm -f "$(_registry_path "$username")"
+    echo "Removed sandbox user and kept home: $username"
+    return 0
+  fi
+
+  _validate_home_for_removal "$username" "$home_dir"
+  sudo sysadminctl -deleteUser "$username"
+  _remove_home "$username" "$home_dir"
+  sudo rm -f "$(_registry_path "$username")"
+  echo "Removed sandbox user: $username"
+}
+
+_run_as_user() {
+  local username="$1"
+  local chdir_home="$2"
+  local home_dir
+  shift 2
+
+  _require_commands sudo id
+  _validate_username "$username"
+
+  if ! _user_exists "$username"; then
+    die "user does not exist: $username"
+  fi
+
+  if [[ $# -eq 0 ]]; then
+    sudo -iu "$username"
+    return
+  fi
+
+  if [[ "$chdir_home" == 'true' ]]; then
+    home_dir="$(_home_for_user "$username")"
+    [[ -n "$home_dir" ]] || die "could not determine home directory for user: $username"
+
+    sudo -H -u "$username" env -C "$home_dir" -- "$@"
+    return
+  fi
+
+  sudo -H -u "$username" "$@"
+}
+
+_assert_managed_user() {
+  local username="$1"
+  local home_dir="$2"
+  local force="$3"
+
+  if [[ "$force" == 'true' || "$username" == "$DEFAULT_PREFIX"* || -f "$home_dir/$MARKER_FILE" ]]; then
+    return 0
+  fi
+
+  if [[ -f "$(_registry_path "$username")" ]]; then
+    return 0
+  fi
+
+  die "refusing to remove non-sandbox-looking user '$username'; pass --force if you really mean it"
+}
+
+_home_for_user() {
+  local username="$1"
+
+  dscacheutil -q user -a name "$username" | awk -F': ' '$1 == "dir" { print $2; exit }'
+}
+
+_remove_home() {
+  local username="$1"
+  local home_dir="$2"
+
+  _validate_home_for_removal "$username" "$home_dir"
+  sudo rm -rf "$home_dir"
+}
+
+_validate_home_for_removal() {
+  local username="$1"
+  local home_dir="$2"
+
+  if [[ -z "$home_dir" || "$home_dir" == '/' || "$home_dir" == '/Users' ]]; then
+    die "refusing to remove unsafe home path for $username: $home_dir"
+  fi
+
+  if [[ "$home_dir" != "/Users/$username" ]]; then
+    die "refusing to remove unexpected home path for $username: $home_dir"
+  fi
+}
+
+_require_macos() {
+  [[ "$(uname -s)" == 'Darwin' ]] || die 'this script only supports macOS'
+}
+
+_require_commands() {
+  local command_name
+
+  for command_name in "$@"; do
+    command -v "$command_name" >/dev/null 2>&1 || die "missing required command: $command_name"
+  done
+}
+
+_user_exists() {
+  local username="$1"
+
+  id -u "$username" >/dev/null 2>&1
+}
+
+_validate_username() {
+  local username="$1"
+
+  [[ "$username" =~ ^[a-z][a-z0-9_-]*$ ]] || die "invalid username: $username"
+}
+
+_random_username() {
+  local prefix="$1"
+  local username
+
+  _require_commands openssl
+
+  while true; do
+    username="${prefix}_$(openssl rand -hex 4)"
+    _validate_username "$username"
+
+    if ! _user_exists "$username"; then
+      echo "$username"
+      return 0
+    fi
+  done
+}
+
+_registry_path() {
+  local username="$1"
+
+  echo "$REGISTRY_DIR/$username"
+}
+
+main "$@"
