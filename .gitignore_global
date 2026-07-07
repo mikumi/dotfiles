@@ -1,0 +1,14 @@
+.history
+.idea
+.vscode
+.DS_Store
+.VSCodeCounter
+
+# .clinerules
+# .cursorrules
+# memory-bank/
+
+.claude/settings.local.json
+.claude/worktrees
+tsconfig.tsbuildinfo
+node_modules/

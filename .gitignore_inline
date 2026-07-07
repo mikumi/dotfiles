@@ -1,0 +1,10 @@
+.codex
+.history
+.idea
+.vscode
+.DS_Store
+.VSCodeCounter
+.claude/settings.local.json
+.claude/worktrees
+tsconfig.tsbuildinfo
+node_modules/

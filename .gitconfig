@@ -4,7 +4,7 @@
 	signingkey = /Users/michael/.ssh/id_rsa.pub
 [core]
 	autocrlf = input
-	excludesFile = ~/.gitignore
+	excludesfile = /Users/michael/.gitignore_global
 	editor = vim
 	pager = 
 [difftool "sourcetree"]
@@ -22,6 +22,8 @@
 	smudge = git-lfs smudge -- %f
 	required = true
 	process = git-lfs filter-process
+[includeIf "gitdir:~/Development/inline/"]
+	path = ~/.gitconfig-inline
 [commit]
 	template = /Users/michaelkuck/.stCommitMsg
 	gpgsign = true
