@@ -1,7 +1,22 @@
 # This is not an actual dotfile but the git ignore list for this repository :-)
 
 .DS_Store
+secrets.env
+bin/cloud-sql-proxy
+bin/cloud_sql_proxy
+bin/devcontainer
+bin/docker
+bin/docker-buildx
+bin/docker-compose
+bin/docker-credential-osxkeychain
 bin/Extensions
+bin/orb
+bin/orbctl
+bin/raycast-scripts/node_modules
+bin/raycast-scripts/.DS_Store
+bin/ToggleHDR
 bin/unhide
 bin/unhide.sh
-secrets.env
+bin/.history
+.history
+

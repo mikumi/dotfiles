@@ -14,7 +14,7 @@ fi
 export CLICOLOR=1
 
 # Local bin
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/bin/scripts
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
