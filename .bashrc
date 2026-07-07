@@ -11,7 +11,8 @@ if [ "$SHELL" = "/bin/bash" ]; then
 	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"  # Save+reload history after each command
 fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# LM Studio CLI
+export PATH="$PATH:/Users/michael/.cache/lm-studio/bin"

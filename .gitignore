@@ -4,3 +4,4 @@
 bin/Extensions
 bin/unhide
 bin/unhide.sh
+secrets.env

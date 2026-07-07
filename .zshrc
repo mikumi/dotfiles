@@ -1,16 +1,14 @@
-local ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then echo "$BREW_PREFIX/share/antigen/antigen.zsh"; else echo ~/antigen.zsh; fi)
-source "$ANTIGEN_PATH"
-antigen init ~/.antigenrc
-
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
-  source ~/.powerlevel10k/powerlevel10k.zsh-theme
-  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-  # Initialization code that may require console input (password prompts, [y/n]
-  # confirmations, etc.) must go above this block; everything else may go below.
-  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-  fi
+if [[ -n "$CURSOR_AGENT" ]]; then
+  # Skip theme initialization for better compatibility
+else
+  local ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then echo "$BREW_PREFIX/share/antigen/antigen.zsh"; else echo ~/antigen.zsh; fi)
+  source "$ANTIGEN_PATH"
+  antigen init ~/.antigenrc
 fi
+
+# Standard fzf completion loading
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 # Colors
 export CLICOLOR=1
@@ -24,11 +22,6 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # functions
 [[ -f ~/.functions ]] && source ~/.functions
 
-# Fastlane
-if [[ `uname` == 'Darwin' ]] ; then
-    export PATH="$HOME/.fastlane/bin:$PATH"
-    source ~/.fastlane/completions/completion.sh
-fi
 
 # Local profile
 [[ -f ~/.localrc ]] && source ~/.localrc
@@ -37,16 +30,16 @@ fi
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous
 # event).
-export HISTSIZE=500000
-export SAVEHIST=$HISTSIZE
-export HISTFILE=~/.zsh_history
-setopt HIST_IGNORE_ALL_DUPS
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt inc_append_history
-setopt share_history
+export HISTSIZE=500000 # Maximum events in internal history
+export SAVEHIST=$HISTSIZE # Maximum events in history file
+export HISTFILE=~/.zsh_history # Location of history file
+setopt HIST_IGNORE_ALL_DUPS   # Remove older duplicate entries
+setopt extended_history       # Save timestamp and duration
+setopt hist_expire_dups_first # Remove duplicates first when trimming
+setopt hist_ignore_dups       # Don't save duplicate commands
+setopt hist_ignore_space      # Don't save commands starting with space
+setopt inc_append_history     # Save commands immediately
+setopt share_history         # Share history between sessions
 
 # Google Cloud SDK
 if command -v gcloud &> /dev/null; then
@@ -56,16 +49,12 @@ if command -v gcloud &> /dev/null; then
   export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 fi
 
-# Configure NVM
+# # Configure NVM / FNM
 source ~/bin/lazynvm.sh
-
-if [[ "$TERM_PROGRAM" != "vscode" ]]; then
-  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-fi
-
-# Turn off home brew auto updates
-export HOMEBREW_NO_AUTO_UPDATE=1
+export NVM_DIR="$HOME/.nvm"
+eval "$(fnm env --use-on-cd --shell zsh --log-level=error)"
+mkdir -p /tmp/fnm-multishells
+export FNM_MULTISHELLS_DIR="/tmp/fnm-multishells"
 
 # Load various completions
 if command -v kubectl &> /dev/null; then
@@ -80,36 +69,64 @@ export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # FZF Fuzzy matching
 export FZF_DEFAULT_OPTS='--height 80% --border'
+# autoload -U compinit; compinit # is this needed?
+source <(fzf --zsh)
 
-# Zoxide
-eval "$(zoxide init zsh)"
+# Cargo / Rust
+export PATH="/Users/michael/.cargo/bin:$PATH"
 
-## fzf-tab
-fzf-cd-dir() {
-   zi
-}
-zle -N fzf-cd-dir
-bindkey '^e' fzf-cd-dir
-
-zstyle ':fzf-tab:*' fzf-command
-zstyle ':fzf-tab:*' popup-min-size 50 8
-zstyle ':fzf-tab:*' fzf-min-height 8
-zstyle ':fzf-tab:*' fzf-pad 4
 # Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
-
-# Github Copilot
-eval "$(github-copilot-cli alias -- "$0")"
 
 # AWS CLI
 export AWS_PAGER="" # This disables the output pager for aws cli, extremely annoying
 
-if [[ "$TERM_PROGRAM" = "vscode" ]]; then
-  autoload -Uz vcs_info
-  precmd() { vcs_info }
+export PATH="/Users/michael/miniconda3/bin:$PATH"
 
-  zstyle ':vcs_info:git:*' formats '%b '
+# Lazy load full conda setup when needed
+conda() {
+  unset -f conda
+  __conda_setup="$('/Users/michael/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+  else
+    if [ -f "/Users/michael/miniconda3/etc/profile.d/conda.sh" ]; then
+      . "/Users/michael/miniconda3/etc/profile.d/conda.sh"
+    fi
+  fi
+  unset __conda_setup
+  conda "$@"
+}
 
-  setopt PROMPT_SUBST
-  PROMPT='%F{green}%*%f %F{blue}%~%f %F{red}${vcs_info_msg_0_}%f$ '
+# Deno
+. "/Users/michael/.deno/env"
+
+# LM Studio CLI
+export PATH="$PATH:/Users/michael/.cache/lm-studio/bin"
+
+if [[ -n "$CURSOR_AGENT" ]]; then
+  # Skip theme initialization for better compatibility
+else
+  eval "$(starship init zsh)"
 fi
+
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Fix alt arrow keys for word navigation
+bindkey -e
+bindkey "^[[1;3D" backward-word
+bindkey "^[[1;3C" forward-word
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
+
+# bun completions
+[ -s "/Users/michael/.bun/_bun" ] && source "/Users/michael/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Load secrets
+source ~/.secrets.env
+
