@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function doIt() {
-    if [[ `uname` == 'Darwin' ]] ; then
+    if [[ $(uname) == 'Darwin' ]] ; then
         # Install homebrew
         echo "Installing homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -15,19 +15,39 @@ function doIt() {
         brew bundle install Brewfile
     fi
 
-    if [[ `uname` == 'Linux' ]] ; then
+    if [[ $(uname) == 'Linux' ]] ; then
         # Install basics
         echo "Installing basic apt packages..."
         sudo apt-get update
-        sudo apt-get install build-essential curl zsh locales
+        sudo apt-get install build-essential curl zsh locales git
         sudo locale-gen en_US.UTF-8
+
+        # rbenv. required for DIY homebrew
+        echo "Installing rbenv and ruby..."
+        git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+        cd ~/.rbenv && src/configure && make -C src
+        cd ~
+        echo 'export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"' >> ~/.zshrc
+        export PATH="$HOME/.rbenv/bin:$HOME/.rbenv/shims:$PATH"
+        ~/.rbenv/bin/rbenv init
+        mkdir -p "$(rbenv root)"/plugins
+        git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)"/plugins/ruby-build
+        curl -fsSL https://github.com/rbenv/rbenv-installer/raw/main/bin/rbenv-doctor | bash
+        rbenv install 2.6.8
+        rbenv global 2.6.8
 
         # Install homebrew
         echo "Installing homebrew..."
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-        echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
-        eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        brew install gcc@7
+        # homebrew (DIY because otherwise doesn't work on ARM)
+        # we could also detect platform and use the official installer for x64, but haven't done that yet
+        mkdir homebrew && curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+        eval "$(homebrew/bin/brew shellenv)"
+        brew update --force --quiet
+        chmod -R go-w "$(brew --prefix)/share/zsh"
+        # sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+        # echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+        # eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        # brew install gcc@7
 
         # Install apps
         brew bundle install Brewfile
@@ -48,6 +68,9 @@ function doIt() {
         .ec2cfg \
         .functions \
         .gitconfig \
+        .gitconfig-inline \
+        .gitignore_global \
+        .gitignore_inline
         .hyper.js \
         .ideavimrc \
         .npmrc \

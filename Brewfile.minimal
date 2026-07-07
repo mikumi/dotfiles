@@ -1,9 +1,9 @@
 tap "cloudflare/cloudflare"
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
+# tap "homebrew/cask"
+# tap "homebrew/cask-fonts"
+# tap "homebrew/cask-versions"
+# tap "homebrew/core"
 tap "homebrew/services"
 
 brew "ack"
@@ -51,7 +51,7 @@ brew "watchman"
 brew "yt-dlp"
 brew "zoxide"
 
-brew "cloudflare/cloudflare/cloudflared", link: false
+brew "cloudflared", link: false
 
 cask "1password"
 cask "appcleaner"
