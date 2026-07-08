@@ -50,7 +50,7 @@ if command -v gcloud &> /dev/null; then
 fi
 
 # # Configure NVM / FNM
-source ~/bin/lazynvm.sh
+source ~/bin/scripts/lazynvm.sh
 export NVM_DIR="$HOME/.nvm"
 eval "$(fnm env --use-on-cd --shell zsh --log-level=error)"
 mkdir -p /tmp/fnm-multishells
