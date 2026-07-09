@@ -1,20 +1,22 @@
-if [[ -n "$CURSOR_AGENT" ]]; then
-  # Skip theme initialization for better compatibility
-else
-  local ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then echo "$BREW_PREFIX/share/antigen/antigen.zsh"; else echo ~/antigen.zsh; fi)
+typeset -U path PATH
+
+if [[ -o interactive && -t 0 && -z "$CURSOR_AGENT" ]]; then
+  ANTIGEN_PATH=$(if [ -f "$BREW_PREFIX/share/antigen/antigen.zsh" ]; then echo "$BREW_PREFIX/share/antigen/antigen.zsh"; else echo ~/antigen.zsh; fi)
   source "$ANTIGEN_PATH"
   antigen init ~/.antigenrc
 fi
 
 # Standard fzf completion loading
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [[ -o interactive && -t 0 ]]; then
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+fi
 
 
 # Colors
 export CLICOLOR=1
 
 # Local bin
-export PATH=$PATH:~/bin:~/bin/scripts
+path=($path "$HOME/bin" "$HOME/bin/scripts")
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -57,23 +59,24 @@ mkdir -p /tmp/fnm-multishells
 export FNM_MULTISHELLS_DIR="/tmp/fnm-multishells"
 
 # Load various completions
-if command -v kubectl &> /dev/null; then
-  source <(kubectl completion zsh)
+if [[ -o interactive && -t 0 ]]; then
+  if command -v kubectl &> /dev/null; then
+    source <(kubectl completion zsh)
+  fi
+  if command -v doctl &> /dev/null; then
+    source  <(doctl completion zsh)
+  fi
 fi
-if command -v doctl &> /dev/null; then
-  source  <(doctl completion zsh)
-fi
-
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # FZF Fuzzy matching
 export FZF_DEFAULT_OPTS='--height 80% --border'
 # autoload -U compinit; compinit # is this needed?
-source <(fzf --zsh)
+if [[ -o interactive && -t 0 ]] && command -v fzf &> /dev/null; then
+  source <(fzf --zsh)
+fi
 
 # Cargo / Rust
-export PATH="/Users/michael/.cargo/bin:$PATH"
+[[ -d "$HOME/.cargo/bin" ]] && path=("$HOME/.cargo/bin" $path)
 
 # Aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -81,34 +84,24 @@ export PATH="/Users/michael/.cargo/bin:$PATH"
 # AWS CLI
 export AWS_PAGER="" # This disables the output pager for aws cli, extremely annoying
 
-# Deno
-. "/Users/michael/.deno/env"
-
 # LM Studio CLI
 export PATH="$PATH:/Users/michael/.cache/lm-studio/bin"
 
-if [[ -n "$CURSOR_AGENT" ]]; then
-  # Skip theme initialization for better compatibility
-else
+if [[ -o interactive && -t 0 && -z "$CURSOR_AGENT" ]]; then
   eval "$(starship init zsh)"
 fi
 
 
-export PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/.local/bin" ]] && path=("$HOME/.local/bin" $path)
 
 # Fix alt arrow keys for word navigation
-bindkey -e
-bindkey "^[[1;3D" backward-word
-bindkey "^[[1;3C" forward-word
-bindkey "^[b" backward-word
-bindkey "^[f" forward-word
-
-# bun completions
-[ -s "/Users/michael/.bun/_bun" ] && source "/Users/michael/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+if [[ -o interactive && -t 0 ]]; then
+  bindkey -e
+  bindkey "^[[1;3D" backward-word
+  bindkey "^[[1;3C" forward-word
+  bindkey "^[b" backward-word
+  bindkey "^[f" forward-word
+fi
 
 # Load secrets
 source ~/.secrets.env

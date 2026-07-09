@@ -10,9 +10,3 @@ if [ "$SHELL" = "/bin/bash" ]; then
 	shopt -s histappend                      # append to history, don't overwrite it
 	export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"  # Save+reload history after each command
 fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# LM Studio CLI
-export PATH="$PATH:/Users/michael/.cache/lm-studio/bin"
