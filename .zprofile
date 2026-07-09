@@ -16,10 +16,6 @@ if command -v $HOMEBREW_PATH &> /dev/null; then
     export HOMEBREW_NO_AUTO_UPDATE=1
 fi
 
-export POETRY_VIRTUALENVS_PROMPT=" "
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
-
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 

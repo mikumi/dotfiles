@@ -81,23 +81,6 @@ export PATH="/Users/michael/.cargo/bin:$PATH"
 # AWS CLI
 export AWS_PAGER="" # This disables the output pager for aws cli, extremely annoying
 
-export PATH="/Users/michael/miniconda3/bin:$PATH"
-
-# Lazy load full conda setup when needed
-conda() {
-  unset -f conda
-  __conda_setup="$('/Users/michael/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-  else
-    if [ -f "/Users/michael/miniconda3/etc/profile.d/conda.sh" ]; then
-      . "/Users/michael/miniconda3/etc/profile.d/conda.sh"
-    fi
-  fi
-  unset __conda_setup
-  conda "$@"
-}
-
 # Deno
 . "/Users/michael/.deno/env"
 
@@ -129,4 +112,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Load secrets
 source ~/.secrets.env
-
